@@ -15,8 +15,8 @@
         });
 
         SC.stream("/tracks/"+track.sc.id, opts, function(stream){
-            stream.load();
             currentStream = stream;
+            stream.load();
         });
     }
 
