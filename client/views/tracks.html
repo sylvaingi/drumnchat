@@ -1,5 +1,5 @@
-<template name="tracklist">
-  <div class="tracklist">
+<template name="playlist">
+  <div class="playlist">
     {{#each tracks}}
       {{> track}}
     {{/each}}
@@ -7,10 +7,19 @@
 </template>
 
 <template name="track">
-    <img src="{{artwork_url}}" alt="{{title}}">
-    {{title}} ({{user}})
+  <div class="track">  
+    <img src="{{artwork}}" alt="{{title}}">
+    <div class="track-info">
+      <p class="track-info-user">
+        {{sc.user.username}}
+      </p>
+      <p class="track-info-title">
+        {{sc.title}}
+      </p>
+      <p>{{votes}}</p>
+    </div>
+  </div>
 </template>     
-
 
 <template name="form">
     <form action="#">

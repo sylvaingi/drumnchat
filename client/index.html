@@ -1,11 +1,17 @@
 <head>
-  <title>Leaderboard</title>
+  <title>Drum'n'chat</title>
 </head>
 
 <body>
-  <div id="outer">
-    {{> form}}
-    {{> tracklist}}
-    {{> player}}
-  </div>
+  <section id="main" role="main" class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3">
+            {{> form}}
+            {{> playlist}}
+        </div>
+        <div class="span9">
+            {{> player}}
+        </div>
+    </div>
+  </section>
 </body>

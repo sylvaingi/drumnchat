@@ -1,0 +1,30 @@
+{
+    "globals": {
+      "jQuery": true,
+      
+      "Meteor": true,
+      "Template": true,
+      "Session": true,
+
+      "_": true,
+
+
+      "SC": true,
+      "Waveform": true,
+
+      "DNC": true
+    },
+
+    "curly": true,
+    "eqeqeq": true,
+    "immed": true,
+    "latedef": true,
+    "newcap": true,
+    "noarg": true,
+    "sub": true,
+    "undef": true,
+    "boss": true,
+    "eqnull": true,
+    "browser": true,
+    "devel": true
+}

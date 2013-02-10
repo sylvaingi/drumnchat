@@ -6,3 +6,5 @@ SC.initialize({
     client_id: DNC.SC.client_id,
     redirect_uri: "http://localhost:3501/callback.html"
 });
+
+Meteor.subscribe("playlist");

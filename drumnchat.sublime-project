@@ -2,7 +2,9 @@
 	"folders":
 	[
 		{
-			"path": "/home/sylvain/code/drumncloud/drumnchat"
+			"path": "/home/sylvain/code/drumnchat",
+            "folder_exclude_patterns": [".meteor"]
 		}
 	]
+
 }

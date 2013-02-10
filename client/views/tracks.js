@@ -1,12 +1,14 @@
-Template.tracklist.tracks = function () {
-    return Tracks.find();
+Template.playlist.tracks = function () {
+    return DNC.Tracks.playlist();
+};
+
+Template.track.artwork = function(){
+    return this.sc.artwork_url || this.sc.user.avatar_url;
 };
 
 Template.track.events({
     "click": function(event, template){
-        SC.get("/tracks/"+this.id, function(track){
-            Session.set("playing", track);
-        })
+        Meteor.call("vote", this._id);
     }
 });
 

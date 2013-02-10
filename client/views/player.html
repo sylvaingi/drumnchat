@@ -1,9 +1,8 @@
 <template name="player">
-    {{#if playing}}
     <div class="player">
-        <p>{{playing.title}}</p>
-        <img src="{{playing.artwork_url}}" alt="{{playing.title}}">
-        <div class="waveform"></div>
+        <h1>{{track.sc.title}}</h1>
+        {{#constant}}
+            <div class="waveform"></div>
+        {{/constant}}
     </div>
-    {{/if}}
 </template>
