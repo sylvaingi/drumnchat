@@ -1,5 +1,5 @@
 (function() {
-  var JSONP, Waveform,
+  var Waveform,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   window.Waveform = Waveform = (function() {
@@ -176,7 +176,7 @@
 
     Waveform.prototype.dataFromSoundCloudTrack = function(track) {
       var _this = this;
-      return JSONP.get("http://waveformjs.org/w", {
+      return $.getJSON("http://waveformjs.org/w?callback=?", {
         url: track.waveform_url
       }, function(data) {
         return _this.update({
@@ -187,67 +187,6 @@
 
     return Waveform;
 
-  })();
-
-  JSONP = (function() {
-    var config, counter, encode, head, jsonp, key, load, query, setDefaults, window;
-    load = function(url) {
-      var done, head, script;
-      script = document.createElement("script");
-      done = false;
-      script.src = url;
-      script.async = true;
-      script.onload = script.onreadystatechange = function() {
-        if (!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
-          done = true;
-          script.onload = script.onreadystatechange = null;
-          if (script && script.parentNode) {
-            return script.parentNode.removeChild(script);
-          }
-        }
-      };
-      if (!head) {
-        head = document.getElementsByTagName("head")[0];
-      }
-      return head.appendChild(script);
-    };
-    encode = function(str) {
-      return encodeURIComponent(str);
-    };
-    jsonp = function(url, params, callback, callbackName) {
-      var key, query;
-      query = ((url || "").indexOf("?") === -1 ? "?" : "&");
-      params = params || {};
-      for (key in params) {
-        if (params.hasOwnProperty(key)) {
-          query += encode(key) + "=" + encode(params[key]) + "&";
-        }
-      }
-      jsonp = "json" + (++counter);
-      window[jsonp] = function(data) {
-        callback(data);
-        try {
-          delete window[jsonp];
-        } catch (_error) {}
-        return window[jsonp] = null;
-      };
-      load(url + query + (callbackName || config["callbackName"] || "callback") + "=" + jsonp);
-      return jsonp;
-    };
-    setDefaults = function(obj) {
-      var config;
-      return config = obj;
-    };
-    counter = 0;
-    head = void 0;
-    query = void 0;
-    key = void 0;
-    window = this;
-    config = {};
-    return {
-      get: jsonp,
-      init: setDefaults
-    };
   })();
 
 }).call(this);
