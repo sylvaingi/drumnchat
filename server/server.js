@@ -18,7 +18,7 @@
             console.log("Next track is "+track.sc.title+" with "+track.votes+" votes");
         }
         else {
-            DNC.Tracks.update(track._id, {$set: {offset: track.offset + 60000}});
+            DNC.Tracks.update(track._id, {$set: {offset: track.offset + tickInterval}});
             console.log("Tick: current track "+track.sc.title+ " offset "+track.offset);
         }
 

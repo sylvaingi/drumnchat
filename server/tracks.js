@@ -61,8 +61,8 @@
     };
 
     function prepareCachedSCData(scData){
-        var sc = _.pick(scData, 'id', 'title', 'duration', 'artwork_url');
-        sc.user = _.pick(scData.user, 'username', 'avatar_url');
+        var sc = _.pick(scData, 'id', 'title', 'duration', 'artwork_url', 'permalink_url');
+        sc.user = _.pick(scData.user, 'username', 'avatar_url', 'permalink_url');
         return sc;
     }
 
