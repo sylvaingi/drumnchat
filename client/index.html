@@ -6,11 +6,13 @@
   <section id="main" role="main" class="container-fluid">
     <div class="row-fluid">
         <div class="span3">
+            {{> connect}}
             {{> form}}
             {{> playlist}}
         </div>
         <div class="span9">
             {{> player}}
+            <div class="waveform"></div>
         </div>
     </div>
   </section>

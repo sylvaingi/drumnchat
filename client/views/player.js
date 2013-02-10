@@ -10,13 +10,12 @@
 
         var opts = optsForWaveform(track);
         opts.whileloading = _.wrap(opts.whileloading, function(whileloading){
-            deferPlayAtRequiredOffset.call(this, track);
             whileloading.call(this);
+            deferPlayAtRequiredOffset.call(this, track);
         });
-
+        opts.autoLoad = true;
         SC.stream("/tracks/"+track.sc.id, opts, function(stream){
             currentStream = stream;
-            stream.load();
         });
     }
 

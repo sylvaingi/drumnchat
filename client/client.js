@@ -15,3 +15,7 @@ new Meteor.Collection("current").find().observe({
         Session.set("current-track", track);
     }
 });
+
+if(SC.isConnected()){
+    DNC.refreshUser();
+}
