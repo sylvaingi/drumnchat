@@ -45,14 +45,15 @@
         }
     }
 
-    Meteor.autosubscribe(function(){
+    Template.player.track = function(){
+        return Session.get("current-track");
+    };
+
+    Template.player.rendered = function(){
         var track = Session.get("current-track");
         if(track){
             playTrack(track);
         }
-    });
-
-    Template.player.track = function(){
-        return Session.get("current-track");
     };
+
 }());
