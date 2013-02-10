@@ -45,12 +45,10 @@
         }
     }
 
-    var playingQuery = DNC.Tracks.find({playing:true});
-    playingQuery.observe({
-        added: function(track){
-            Session.set("current-track", track);
-            playTrack(track);
-        }
+    Meteor.subscribe("current", function(){
+        var currentTrack = new Meteor.Collection("current").findOne();
+        Session.set("current-track", currentTrack);
+        playTrack(currentTrack);
     });
 
     Template.player.track = function(){
