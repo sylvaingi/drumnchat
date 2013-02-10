@@ -5,6 +5,7 @@
     function tick(){
         if(DNC.Tracks.playlist().count() === 0){
             console.log("No tracks in playlist");
+            nextTick();
             return;
         }
 
@@ -22,6 +23,10 @@
             console.log("Tick: current track "+track.sc.title+ " offset "+track.offset);
         }
 
+        nextTick();
+    }
+
+    function nextTick(){
         Meteor.setTimeout(tick, tickInterval);
     }
 
