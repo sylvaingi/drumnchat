@@ -1,0 +1,9 @@
+<template name="player">
+    {{#if playing}}
+    <div class="player">
+        <p>{{playing.title}}</p>
+        <img src="{{playing.artwork_url}}" alt="{{playing.title}}">
+        <div class="waveform"></div>
+    </div>
+    {{/if}}
+</template>

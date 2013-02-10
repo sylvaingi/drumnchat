@@ -1,0 +1,20 @@
+<template name="tracklist">
+  <div class="tracklist">
+    {{#each tracks}}
+      {{> track}}
+    {{/each}}
+  </div>
+</template>
+
+<template name="track">
+    <img src="{{artwork_url}}" alt="{{title}}">
+    {{title}} ({{user}})
+</template>     
+
+
+<template name="form">
+    <form action="#">
+        <input type="text" name="track-url" required>
+        <button type="submit">Ajouter</button>
+    </form>
+</template>     
