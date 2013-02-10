@@ -1,3 +1,4 @@
 .meteor
-drumnchat.sublime-project
-drumnchat.sublime-workspace
+    
+*.sublime-project
+*.sublime-workspace
