@@ -3,7 +3,19 @@ Meteor.publish("playlist", function(){
 });
 
 Meteor.publish("current", function(){
-    this.set("current", Meteor.uuid(), DNC.Tracks.playingTrack());
-    this.complete();
-    this.flush();
+    var self = this;
+
+    var handle = DNC.Tracks.find({playing: true}).observe({
+        added: function (doc, idx) {
+            self.set("current", Meteor.uuid(), DNC.Tracks.playingTrack());
+            self.flush();
+        }
+    });
+
+    self.complete();
+    self.flush();
+
+    self.onStop(function () {
+        handle.stop();
+    });
 });

@@ -8,3 +8,10 @@ SC.initialize({
 });
 
 Meteor.subscribe("playlist");
+Meteor.subscribe("current");
+
+new Meteor.Collection("current").find().observe({
+    added: function(track){
+        Session.set("current-track", track);
+    }
+});

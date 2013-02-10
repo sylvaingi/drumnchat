@@ -45,10 +45,11 @@
         }
     }
 
-    Meteor.subscribe("current", function(){
-        var currentTrack = new Meteor.Collection("current").findOne();
-        Session.set("current-track", currentTrack);
-        playTrack(currentTrack);
+    Meteor.autosubscribe(function(){
+        var track = Session.get("current-track");
+        if(track){
+            playTrack(track);
+        }
     });
 
     Template.player.track = function(){
