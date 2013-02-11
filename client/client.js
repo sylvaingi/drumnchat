@@ -9,6 +9,7 @@ SC.initialize({
 
 Meteor.subscribe("playlist");
 Meteor.subscribe("current");
+Meteor.subscribe("allUserData");
 
 new Meteor.Collection("current").find().observe({
     added: function(track){

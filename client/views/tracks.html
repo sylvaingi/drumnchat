@@ -7,7 +7,7 @@
 </template>
 
 <template name="track">
-  <div class="track">  
+  <div class="track {{#if playing}}playing{{/if}}">  
     <img src="{{artwork}}" alt="{{title}}">
     <div class="track-info">
       <p class="track-info-user">
@@ -18,6 +18,11 @@
       </p>
       <p>{{votes}}</p>
     </div>
+    {{#unless playing}}
+    <div class="track-vote">
+      <i class="icon-circle-arrow-up"></i>
+    </div>
+    {{/unless}}
   </div>
 </template>     
 

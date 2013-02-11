@@ -19,3 +19,7 @@ Meteor.publish("current", function(){
         handle.stop();
     });
 });
+
+Meteor.publish("allUserData", function () {
+    return Meteor.users.find({active:true}, {fields:{'id':1, 'avatar_url':1, 'permalink_url':1, 'active':1}});
+});

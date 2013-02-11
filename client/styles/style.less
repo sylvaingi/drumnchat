@@ -9,6 +9,23 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+html, body{
+    height: 100%;
+}
+
+
+#main{
+    height: 100%;
+
+    > .row-fluid{
+        height: 100%;
+        > * {
+            position: relative;
+            height: 100%;
+        }
+    }
+}
+
 .user {
     float: left;
     margin-right: 10px;
@@ -26,7 +43,13 @@
     height: 64px;
     width: 100%;
     padding-left: 64px;
+    padding-right: 25px;
     margin-bottom: 5px;
+    
+    &.playing {
+        background-color: #dff0d8;
+    }
+
     img {
         position: absolute;
         top: 0;
@@ -46,11 +69,26 @@
     display: inline-block;
     height: 100%;
     width: 100%;
-    padding: 5px;
+    padding: 0 5px;
 }
 
 .track-info-user {
     
+}
+
+.track-vote {
+    position: absolute;
+    top:0;
+    right:0;
+    width: 25px;
+    height: 100%;
+    line-height: 64px;
+    text-align: center;
+
+    &:hover{
+        background-color: #dff0d8; 
+        cursor: pointer;
+    }
 }
 
 .waveform {
@@ -67,4 +105,16 @@ a.madewith_badge{
     right:inherit;
     bottom:0;
     left: 115px;
+}
+
+.active-users{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin: 0;
+    list-style: none;
+}
+
+.active-user{
+    float: left;
 }

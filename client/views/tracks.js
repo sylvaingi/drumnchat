@@ -7,7 +7,7 @@ Template.track.artwork = function(){
 };
 
 Template.track.events({
-    "click": function(event, template){
+    "click .track-vote": function(event, template){
         Meteor.call("vote", this._id);
     }
 });

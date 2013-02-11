@@ -1,8 +1,14 @@
 DNC.refreshUser = function(){
     SC.get("/me", function(me){
         Session.set("user", me);
+        Meteor.call("heartbeat", Session.get("user"));
+
+        DNC.heartbeatId = Meteor.setInterval(function(){
+            Meteor.call("heartbeat");
+        }, 10000);
     });
 };
+
 
 Template.connect.events({
     "click .sc-connect": function(event, template){
@@ -16,6 +22,8 @@ Template.connect.events({
         event.preventDefault();
         SC.disconnect();
         Session.set("user", null);
+        Meteor.clearInterval(DNC.heartbeatId);
+        Meteor.logout();
     } 
 });
 

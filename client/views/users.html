@@ -1,0 +1,13 @@
+<template name="active-users">
+    <ul class="active-users">
+        {{#each users}}
+            {{> active-user}}
+        {{/each}}
+    </ul>
+</template>
+
+<template name="active-user">
+    <li class="active-user">
+        <img src="{{avatar_url_tiny}}" alt="{{username}}">
+    </li>
+</template>
