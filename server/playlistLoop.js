@@ -16,11 +16,11 @@
             DNC.Tracks.nextTrack();
 
             track = DNC.Tracks.playingTrack();
-            console.log("Next track is "+track.sc.title+" with "+track.votes+" votes");
+            console.log("Next track is '"+track.sc.title+"' with "+track.votes+" votes");
         }
         else {
             DNC.Tracks.update(track._id, {$set: {offset: track.offset + tickInterval}});
-            console.log("Tick: current track "+track.sc.title+ " offset "+track.offset);
+            console.log("Tick: current track '"+track.sc.title+ "' offset "+track.offset);
         }
 
         nextTick();

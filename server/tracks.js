@@ -34,6 +34,14 @@
         if(result.statusCode !== 200){
             throw new Meteor.Error(result.statusCode, "Unable to resolve SC URL");
         }
+        
+        var track = Tracks.findOne({"sc.id":result.data.id});
+        if(track){
+            console.log("Track '"+result.data.title+"' is already enqueued, voting instead");
+            Tracks.addVote(track._id);  
+
+            return;
+        }
 
         var sc = prepareCachedSCData(result.data);
         Tracks.insert({
@@ -66,7 +74,13 @@
         return sc;
     }
 
-    Tracks.addVote = function(id){
-        Tracks.update(id, {$inc: {votes: 1}});
+    Tracks.addVote = function(_id){
+        var playing = Tracks.playingTrack();
+        if(_id === playing._id){
+            console.log("Ignoring vote for playing track");
+            return;
+        }
+
+        Tracks.update(_id, {$inc: {votes: 1}});
     };
 }());
