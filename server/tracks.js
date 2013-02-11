@@ -26,7 +26,7 @@
         Tracks.update(track._id, {$set: setAttrs});
     };
 
-    Tracks.enqueue = function(url){
+    Tracks.enqueue = function(url, userId){
         var result = Meteor.http.get("http://api.soundcloud.com/resolve", {
             params : {url:url, client_id: DNC.SC.client_id, format:'json'}
         });
@@ -53,7 +53,7 @@
 
         var sc = prepareCachedSCData(result.data);
         Tracks.insert({
-            votes: 1,
+            votes: [userId],
             playing: false,
             addedOn: new Date(),
             lastPlayed: new Date(0),
@@ -69,7 +69,7 @@
 
         var setAttrs = {
             sc: track._sc,
-            votes: 0,
+            votes: [],
             lastPlayed: new Date(),
             playing: false
         };
@@ -82,13 +82,13 @@
         return sc;
     }
 
-    Tracks.addVote = function(_id){
+    Tracks.addVote = function(_id, userId){
         var playing = Tracks.playingTrack();
         if(_id === playing._id){
             console.log("Ignoring vote for playing track");
             return;
         }
 
-        Tracks.update(_id, {$inc: {votes: 1}});
+        Tracks.update(_id, {$addToSet: {votes: userId}});
     };
 }());
