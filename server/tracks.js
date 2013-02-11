@@ -34,6 +34,10 @@
         if(result.statusCode !== 200){
             throw new Meteor.Error(result.statusCode, "Unable to resolve SC URL");
         }
+
+        if(!result.data.streamable){
+            throw new Meteor.Error(400, "Unable to stream SC track, streaming is disabled");
+        }
         
         var track = Tracks.findOne({"sc.id":result.data.id});
         if(track){
