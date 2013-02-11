@@ -169,7 +169,7 @@
             };
             innerColorWasSet = true;
           }
-          return this.redraw;
+          that.redraw();
         }
       };
     };
