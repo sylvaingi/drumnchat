@@ -4,9 +4,9 @@
     var currentStream;
 
     function playTrack(track){
-        if(currentStream){
-            currentStream.destruct();
-        }
+        DNC.Player.destruct();
+
+        console.log("Playing ", track);
 
         var opts = optsForWaveform(track);
         opts.whileloading = _.wrap(opts.whileloading, function(whileloading){
@@ -50,6 +50,14 @@
             Session.set("onair", track);
         }
     });
+
+    DNC.Player = {
+        destruct : function(){
+            if(currentStream){
+                currentStream.destruct();
+            }
+        }
+    };
 
     Template.player.track = function(){
         return Session.get("onair");

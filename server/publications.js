@@ -7,7 +7,7 @@ Meteor.publish("onair", function(){
 
     var handle = DNC.Tracks.find({playing: true}).observe({
         added: function (doc, idx) {
-            self.set("onair", Meteor.uuid(), DNC.Tracks.playingTrack());
+            self.set("onair", doc._id, doc);
             self.flush();
         }
     });
