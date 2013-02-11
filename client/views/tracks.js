@@ -15,7 +15,11 @@ Template.track.votes_avatars = function(){
 
 Template.track.events({
     "click .track-vote": function(event, template){
-        Meteor.call("vote", this._id);
+        Meteor.call("vote", this._id, function(error){
+            if(error){
+                alert(error.reason);
+            }
+        });
     }
 });
 
