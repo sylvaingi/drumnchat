@@ -38,6 +38,10 @@
         if(!result.data.streamable){
             throw new Meteor.Error(400, "Unable to stream SC track, streaming is disabled");
         }
+
+        if(result.data.duration > 10 * 60 * 1000){
+            throw new Meteor.Error(400, "Track duration is too long");
+        }
         
         var track = Tracks.findOne({"sc.id":result.data.id});
         if(track){
