@@ -2,12 +2,12 @@ Meteor.publish("playlist", function(){
     return DNC.Tracks.playlist();
 });
 
-Meteor.publish("current", function(){
+Meteor.publish("onair", function(){
     var self = this;
 
     var handle = DNC.Tracks.find({playing: true}).observe({
         added: function (doc, idx) {
-            self.set("current", Meteor.uuid(), DNC.Tracks.playingTrack());
+            self.set("onair", Meteor.uuid(), DNC.Tracks.playingTrack());
             self.flush();
         }
     });

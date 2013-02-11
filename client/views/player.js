@@ -5,7 +5,7 @@
 
     function playTrack(track){
         if(currentStream){
-            currentStream.stop();
+            currentStream.destruct();
         }
 
         var opts = optsForWaveform(track);
@@ -39,20 +39,20 @@
     function deferPlayAtRequiredOffset(track){
         if(!track._playing && this.duration > track.offset){
             track._playing = true;
-            currentStream.setPosition(track.offset);
-            currentStream.play();
+            this.setPosition(track.offset);
+            this.play();
         }
     }
 
-    Template.player.track = function(){
-        return Session.get("current-track");
-    };
-
-    Template.player.rendered = function(){
-        var track = Session.get("current-track");
-        if(track){
+    new Meteor.Collection("onair").find().observe({
+        added: function(track){
             playTrack(track);
+            Session.set("onair", track);
         }
+    });
+
+    Template.player.track = function(){
+        return Session.get("onair");
     };
 
 }());
