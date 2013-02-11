@@ -16,7 +16,7 @@
             DNC.Tracks.nextTrack();
 
             track = DNC.Tracks.playingTrack();
-            console.log("Next track is '"+track.sc.title+"' with "+track.votes+" votes");
+            console.log("Next track is '"+track.sc.title+"' with "+track.votes.length+" votes");
         }
         else {
             DNC.Tracks.update(track._id, {$set: {offset: track.offset + tickInterval}});
