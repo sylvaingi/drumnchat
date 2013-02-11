@@ -16,5 +16,7 @@ Template.form.events({
     "submit": function(event, template){
         event.preventDefault();
         Meteor.call("addTrack", template.find("input:text").value);
+
+        event.target.reset();
     }
 });
