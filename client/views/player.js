@@ -6,6 +6,10 @@
     function playTrack(track){
         DNC.Player.destruct();
 
+        Meteor.call("onAirOffset", function(error,result){
+            track._offset = result;
+        });
+        
         console.log("Playing ", track);
 
         var opts = optsForWaveform(track);
@@ -14,6 +18,7 @@
             deferPlayAtRequiredOffset.call(this, track);
         });
         opts.autoLoad = true;
+
         SC.stream("/tracks/"+track.sc.id, opts, function(stream){
             currentStream = stream;
         });
@@ -37,9 +42,9 @@
     }
 
     function deferPlayAtRequiredOffset(track){
-        if(!track._playing && this.duration > track.offset){
+        if(!track._playing && track._offset!== null && this.duration > track._offset){
             track._playing = true;
-            this.setPosition(track.offset);
+            this.setPosition(track._offset);
             this.play();
         }
     }

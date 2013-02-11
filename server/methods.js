@@ -6,6 +6,10 @@
     }
 
     Meteor.methods({
+        "onAirOffset": function(){
+            return DNC.Tracks.playingTrack().offset;
+        },
+
         "addTrack": function(url){
             console.log("Received SC URL '"+url+"'");
             ensureUserIsConnected(this.userId);
