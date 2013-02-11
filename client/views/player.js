@@ -44,7 +44,7 @@
         }
     }
 
-    new Meteor.Collection("onair").find().observe({
+    DNC.Tracks.find({playing: true}).observe({
         added: function(track){
             playTrack(track);
             Session.set("onair", track);
