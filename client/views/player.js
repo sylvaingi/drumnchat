@@ -7,10 +7,11 @@
         DNC.Player.destruct();
 
         Meteor.call("onAirOffset", function(error,result){
+            console.log("Playing track offset is "+ result);
             track._offset = result;
         });
         
-        console.log("Playing ", track);
+        console.log("Playing track", track.sc.title, track);
 
         var opts = optsForWaveform(track);
         opts.whileloading = _.wrap(opts.whileloading, function(whileloading){
@@ -19,7 +20,9 @@
         });
         opts.autoLoad = true;
 
+
         SC.stream("/tracks/"+track.sc.id, opts, function(stream){
+            track._loadstart = Date.now();
             currentStream = stream;
         });
     }
@@ -42,11 +45,17 @@
     }
 
     function deferPlayAtRequiredOffset(track){
-        if(!track._playing && track._offset!== null && this.duration > track._offset){
-            track._playing = true;
-            this.setPosition(track._offset);
-            this.play();
-        }
+        if(!track._playing && track._offset!== null){
+            var latencyComp = Date.now() - track._loadstart;
+            if(this.duration> track._offset + latencyComp){
+                console.log("Playing track caught up with offset at " + this.duration + " (comp "+latencyComp+")");
+
+                track._playing = true;
+
+                this.setPosition(track._offset + latencyComp);
+                this.play();
+            }
+        } 
     }
 
     DNC.Tracks.find({playing: true}).observe({
