@@ -16,7 +16,7 @@
       <p class="track-info-title">
         <a href="{{sc.permalink_url}}" target="_blank">{{sc.title}}</a>
       </p>
-      <p>{{votes.length}} {{#each votes_avatars}} <img src="{{this}}" alt=""> {{/each}}</p>
+      <p>{{votes.length}} {{#each voters}} {{user-avatar this "tiny"}} {{/each}}</p>
     </div>
     {{#unless playing}}
     <div class="track-vote">

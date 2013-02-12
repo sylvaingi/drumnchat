@@ -6,11 +6,8 @@ Template.track.artwork = function(){
     return this.sc.artwork_url || this.sc.user.avatar_url;
 };
 
-Template.track.votes_avatars = function(){
-    var votersId = this.votes;
-    return Meteor.users.find({_id : {$in: votersId}}).map(function(user){
-        return user.avatar_url.replace("large", "tiny");
-    });
+Template.track.voters = function(){
+    return Meteor.users.find({_id : {$in: this.votes}});
 };
 
 Template.track.events({

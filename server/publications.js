@@ -3,5 +3,9 @@ Meteor.publish("playlist", function(){
 });
 
 Meteor.publish("allUserData", function () {
-    return Meteor.users.find({}, {fields:{'id':1, 'avatar_url':1, 'permalink_url':1, 'active':1}});
+    return Meteor.users.find({}, {fields:{'id':1, 'avatar_url':1, 'permalink_url':1, 'active':1, "username":1}});
+});
+
+Meteor.publish("chat", function(){
+    return DNC.Chat.find();
 });

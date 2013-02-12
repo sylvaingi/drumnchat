@@ -1,5 +1,5 @@
 (function(){
-    var subscribesIds = ["playlist", "allUserData"];
+    var subscribesIds = ["playlist", "chat", "allUserData"];
     var subscribesHandles = [];
 
     function subscribeAll(){

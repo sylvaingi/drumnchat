@@ -24,6 +24,13 @@
             DNC.Tracks.addVote(id, this.userId);
         },
 
+        postMessage: function(msg){
+            ensureUserIsConnected(this.userId);
+            console.log("Incoming message from "+this.userId);
+
+            DNC.Chat.insert({message: msg, date: new Date(), user_id: this.userId});
+        },
+
         "heartbeat": function(data){
             console.log("User heartbeat: "+ (data? data.username + " (initial)" : this.userId));
             this.unblock();

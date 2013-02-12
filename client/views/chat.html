@@ -1,0 +1,22 @@
+<template name="chat">
+    <div class="chat">
+        {{#each messages}}
+        {{> message}}
+        {{/each}}
+    </div>
+    {{> chat-form}}
+</template>
+
+<template name="message">
+    <div class="chat-message">
+        {{user-avatar user "small"}}
+        {{message}} {{date}} 
+    </div>
+</template>
+
+<template name="chat-form">
+    <form action="#" class="form-inline">
+        <input type="text" class="input-large" required>
+        <button type="submit" class="btn">Send</button>
+    </form>
+</template>
