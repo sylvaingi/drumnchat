@@ -5,9 +5,8 @@
       "Meteor": true,
       "Template": true,
       "Session": true,
-
+      "Handlebars": true,
       "_": true,
-
 
       "SC": true,
       "Waveform": true,
