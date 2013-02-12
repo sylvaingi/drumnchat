@@ -57,6 +57,10 @@
     });
 
     DNC.Player = {
+        toggleMute: function(){
+            currentStream.toggleMute();
+        },
+
         destruct : function(){
             if(currentStream){
                 currentStream.destruct();
@@ -67,5 +71,13 @@
     Template.player.track = function(){
         return Session.get("onair");
     };
+
+    Template.player.events({
+        "click .mute": function(event){
+            event.preventDefault();
+            DNC.Player.toggleMute();
+            $(event.target).toggleClass("icon-volume-off icon-volume-up");
+        }
+    });
 
 }());
