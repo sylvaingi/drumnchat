@@ -7,6 +7,7 @@
       "Session": true,
       "Handlebars": true,
       "_": true,
+      "moment": true,
 
       "SC": true,
       "Waveform": true,

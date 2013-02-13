@@ -56,4 +56,8 @@
     if(SC.isConnected()){
         refreshUser();
     }
+
+    Meteor.setInterval(function(){
+        Session.set("now", moment());
+    }, 60000);
 }());
