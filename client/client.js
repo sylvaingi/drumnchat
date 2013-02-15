@@ -5,16 +5,15 @@
     Meteor.subscribe("userData");
 
     DNC.login = function(service){
-        var cb = function(){Meteor.call("setActiveState", true);};
         switch(service){
             case "soundcloud":
-                Meteor.loginWithSoundcloud(cb);
+                Meteor.loginWithSoundcloud({});
                 break;
             case "facebook":
-                Meteor.loginWithFacebook(cb);
+                Meteor.loginWithFacebook({});
                 break;
             case "google":
-                Meteor.loginWithGoogle(cb);
+                Meteor.loginWithGoogle({});
                 break;
             default:
                 alert("C'mon dude....");
@@ -25,7 +24,8 @@
     };
 
     DNC.logout = function(){
-        Meteor.call("setActiveState", false);
+        Meteor.call("heartbeat", true);
+        DNC.initHB = false;
         Meteor.logout();
     };
 
@@ -39,7 +39,15 @@
     Accounts.loginServiceConfiguration.find({service: "soundcloud"})
         .observe({added: startSCPlayer});
 
+    Meteor.autorun(function(){
+        if(!DNC.initHB && Meteor.userId()){
+            DNC.initHB = true;
+            Meteor.call("heartbeat");
+        }
+    });
+
     Meteor.setInterval(function(){
         Session.set("now", moment());
-    }, 60000);
+        Meteor.call("heartbeat");
+    }, 30000);
 }());
