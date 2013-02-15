@@ -14,7 +14,7 @@
         toggleMute: function(){
             Player.muted = !!!Player.muted;
             Session.set("DNC.Player.muted", Player.muted);
-            DNC.Player.currentStream.toggleMute();
+            Player.stream.toggleMute();
         },
 
         stop : function(){
@@ -47,7 +47,7 @@
             }
             
             track._loadstart = Date.now();
-            Player.currentStream = stream;
+            Player.stream = stream;
         });
     }
 
