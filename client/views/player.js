@@ -1,33 +1,26 @@
 (function(){
     "use strict";
     
-    var currentStream;
-    var playingHandle;
-
-    DNC.Player = {
+    var Player = {
         start: function(){
-            playingHandle = DNC.Tracks.find({playing: true}).observe({
+            DNC.Player.playingHandle = DNC.Tracks.find({playing: true}).observe({
                 added: function(track){
                     playTrack(track);
-                    Session.set("onair", track);
+                    Session.set("DNC.Player.playing", track);
                 }
             });
         },
 
         toggleMute: function(){
-            currentStream.toggleMute();
+            Player.muted = !!!Player.muted;
+            Session.set("DNC.Player.muted", Player.muted);
+            DNC.Player.currentStream.toggleMute();
         },
 
         stop : function(){
-            if(currentStream){
-                currentStream.destruct();
+            if(Player.stream){
+                Player.stream.destruct();
             }
-        },
-
-        destruct: function(){
-            DNC.Player.stop();
-            playingHandle.stop();
-            Session.set("onair", null);
         }
     };
 
@@ -48,10 +41,13 @@
         });
         opts.autoLoad = true;
 
-
         SC.stream("/tracks/"+track.sc.id, opts, function(stream){
+            if(Player.muted){
+                stream.mute();
+            }
+            
             track._loadstart = Date.now();
-            currentStream = stream;
+            Player.currentStream = stream;
         });
     }
 
@@ -86,15 +82,21 @@
         } 
     }
 
-    Template.player.track = function(){
-        return Session.get("onair");
-    };
+    DNC.Player = Player;
+
+    Template.player.helpers({
+        playing:function(){
+            return Session.get("DNC.Player.playing");
+        },
+        muted: function(){
+            return Session.get("DNC.Player.muted");
+        }
+    });
 
     Template.player.events({
         "click .mute": function(event){
             event.preventDefault();
-            DNC.Player.toggleMute();
-            $(event.target).toggleClass("icon-volume-off icon-volume-up");
+            Player.toggleMute();
         }
     });
 

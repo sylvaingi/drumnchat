@@ -1,9 +1,9 @@
 <template name="player">
     <div class="player">
-        <h1>{{track.sc.title}}</h1>
+        <h1>{{playing.sc.title}}</h1>
         {{#constant}}
         <div class="waveform"></div>
         {{/constant}}
-        <i class="mute icon-volume-up"></i>
+        <i class="mute {{#unless muted}}icon-volume-up{{else}}icon-volume-off{{/unless}}"></i>
     </div>
 </template>
