@@ -1,20 +1,14 @@
 (function(){
     "use strict";
-
     Template.connect.events({
-        "click .sc-connect": function(event, template){
+        "click .connect": function(event, template){
             event.preventDefault();
-            DNC.login();
+            DNC.login(event.currentTarget.getAttribute("data-service"));
         },
 
-        "click .sc-disconnect": function(event, template){
+        "click .disconnect": function(event, template){
             event.preventDefault();
             DNC.logout();
         } 
     });
-
-    Template.connect.user = function(){
-        return Session.get("user");
-    };
-
 }());

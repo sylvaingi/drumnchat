@@ -2,9 +2,37 @@
     "use strict";
     
     var currentStream;
+    var playingHandle;
+
+    DNC.Player = {
+        start: function(){
+            playingHandle = DNC.Tracks.find({playing: true}).observe({
+                added: function(track){
+                    playTrack(track);
+                    Session.set("onair", track);
+                }
+            });
+        },
+
+        toggleMute: function(){
+            currentStream.toggleMute();
+        },
+
+        stop : function(){
+            if(currentStream){
+                currentStream.destruct();
+            }
+        },
+
+        destruct: function(){
+            DNC.Player.stop();
+            playingHandle.stop();
+            Session.set("onair", null);
+        }
+    };
 
     function playTrack(track){
-        DNC.Player.destruct();
+        DNC.Player.stop();
 
         Meteor.call("onAirOffset", function(error,result){
             console.log("Playing track offset is "+ result);
@@ -57,25 +85,6 @@
             }
         } 
     }
-
-    DNC.Tracks.find({playing: true}).observe({
-        added: function(track){
-            playTrack(track);
-            Session.set("onair", track);
-        }
-    });
-
-    DNC.Player = {
-        toggleMute: function(){
-            currentStream.toggleMute();
-        },
-
-        destruct : function(){
-            if(currentStream){
-                currentStream.destruct();
-            }
-        }
-    };
 
     Template.player.track = function(){
         return Session.get("onair");

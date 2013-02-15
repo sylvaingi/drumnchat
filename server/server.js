@@ -7,5 +7,10 @@ Meteor.startup(function(){
     DNC.Tracks.update({"sc.id": 69941995}, {$set: {votes: 10}});
     DNC.Tracks.update({"sc.id": 75409800}, {$set: {votes: 5}});*/
 
+
+    var SC = Accounts.loginServiceConfiguration
+                    .findOne({service: "soundcloud"});
+    DNC.SC_clientId = SC.clientId;
+
     DNC.tick();
 });

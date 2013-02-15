@@ -14,10 +14,10 @@ Meteor.publish("userData", function () {
             memo[prefix+field] = 1;
             return memo;
         }, 
-        {active:1}
+        {'profile.active':1, 'profile.name': 1}
     );
 
-    return Meteor.users.find({}, {fields: fieldSpec});
+    return Meteor.users.find({"profile.active": true}, {fields: fieldSpec});
 });
 
 Meteor.publish("chat", function(){

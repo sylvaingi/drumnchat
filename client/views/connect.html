@@ -1,11 +1,10 @@
 <template name="connect">
-    {{#if user}}
-    <div class="user">
-        {{user-avatar user}}
-        <div class="user-name"><a href="{{user.permalink_url}}">{{user.full_name}}</a></div>
-    </div>
-    <a href="#" class="sc-disconnect"><img src="img/btn-disconnect-l.png" alt="Disconnect"></a>
+    {{#if currentUser}}
+    {{currentUser.profile.name}}
+    <a href="#" class="disconnect">Logout</a>
     {{else}}
-    <a href="#" class="sc-connect"><img src="img/btn-connect-l.png" alt="Connect With Soundcloud"></a>
+    <a href="#" class="connect" data-service="soundcloud"><img src="img/soundcloud.png" alt="Connect With Soundcloud"></a>
+    <a href="#" class="connect" data-service="facebook"><img src="img/facebook.png" alt="Connect With Facebook"></a>
+    <a href="#" class="connect" data-service="google"><img src="img/google.png" alt="Connect With Google"></a>
     {{/if}}
 </template>   

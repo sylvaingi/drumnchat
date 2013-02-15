@@ -6,6 +6,10 @@
     }
  
     Meteor.methods({
+        "SC_clientId": function(){
+            return DNC.SC_clientId;
+        },
+
         "onAirOffset": function(){
             return DNC.Tracks.playingTrack().offset;
         },

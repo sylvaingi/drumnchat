@@ -1,63 +1,53 @@
 (function(){
-    var subscribesIds = ["playlist", "chat", "allUserData"];
-    var subscribesHandles = [];
 
-    function subscribeAll(){
-        _.each(subscribesIds, function(id){
-            var handle = Meteor.subscribe(id);
-            subscribesHandles.push(handle);
-        });
+    Meteor.subscribe("playlist");
+    Meteor.subscribe("chat");
+    Meteor.subscribe("userData");
+
+    function setUserActiveFlag(active){
+        Meteor.users.update({_id: Meteor.userId}, {$set:{"profile.active":active}});
     }
 
-    function unsubscribeAll(){
-        _.each(subscribesHandles, function(handle){
-            handle.stop();
-        });
-    }
-
-    function refreshUser(){
-        SC.get("/me", function(me){
-            Session.set("user", me);
-            Meteor.call("heartbeat", Session.get("user"));
-
-            DNC.heartbeatId = Meteor.setInterval(function(){
-                Meteor.call("heartbeat");
-            }, 10000);
-
-            subscribeAll();
-        });
-    }
-
-    DNC.login = function(){
-        SC.connect(function(){
-            refreshUser();
-        });
+    DNC.login = function(service){
+        var cb = function(){setUserActiveFlag(true);};
+        switch(service){
+            case "soundcloud":
+                Meteor.loginWithSoundcloud();
+                break;
+            case "facebook":
+                break;
+            case "google":
+                break;
+            default:
+                alert("C'mon dude....");
+        }
     };
 
     DNC.logout = function(){
-        unsubscribeAll();
-
-        DNC.Player.destruct();
-        
-        Session.set("user", null);
-        Session.set("onair", null);
-
-        Meteor.clearInterval(DNC.heartbeatId);
+        setUserActiveFlag(false);
         Meteor.logout();
-
-        SC.disconnect();
     };
 
-    SC.initialize({
-        client_id: DNC.SC.client_id,
-        redirect_uri: Meteor.absoluteUrl("soundcloud.html")
-    });
+    Meteor.call("SC_clientId", function(error, clientId){
+        if(error){
+            alert(error.reason);
+        }
 
-    if(SC.isConnected()){
-        refreshUser();
-    }
+        SC.initialize({
+            client_id: clientId
+        });
+        DNC.Player.start();
+    });
 
     Meteor.setInterval(function(){
         Session.set("now", moment());
     }, 60000);
+
+    Meteor.autosubscribe(function(){
+        var user = Meteor.user();
+
+        if(user){
+            setUserActiveFlag(true);
+        }
+    });
 }());

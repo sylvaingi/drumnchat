@@ -5,7 +5,7 @@
         return DNC.Chat.find({}, {sort:{date:1}});
     };
 
-    Template.message["user"] = function(){
+    Template.message.chatUser = function(){
         return Meteor.users.findOne({_id: this.user_id});
     };
 

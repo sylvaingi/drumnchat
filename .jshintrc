@@ -5,6 +5,7 @@
       "Meteor": true,
       "Template": true,
       "Session": true,
+      "Accounts": true,
       "Handlebars": true,
       "_": true,
       "moment": true,

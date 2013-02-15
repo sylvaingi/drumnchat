@@ -8,7 +8,7 @@
         var track = Tracks.findOne({playing: false}, {sort: Tracks.trackSort});
 
         var result = Meteor.http.get("http://api.soundcloud.com/tracks/"+track.sc.id, {
-            params : {client_id: DNC.SC_client_id(), format:'json'}
+            params : {client_id: DNC.SC_clientId, format:'json'}
         });
 
         if(result.statusCode !== 200){
@@ -28,7 +28,7 @@
 
     Tracks.enqueue = function(url, userId){
         var result = Meteor.http.get("http://api.soundcloud.com/resolve", {
-            params : {url:url, client_id: DNC.SC_client_id(), format:'json'}
+            params : {url:url, client_id: DNC.SC_clientId, format:'json'}
         });
 
         if(result.statusCode !== 200){
