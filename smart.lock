@@ -1,0 +1,22 @@
+{
+  "meteor": {
+    "git": "https://github.com/meteor/meteor.git",
+    "branch": "master",
+    "commit": "3753c989fd6c26406409b4b27f86ac9331e38346"
+  },
+  "dependencies": {
+    "basePackages": {
+      "accounts-soundcloud": {
+        "git": "https://github.com/sylvaingi/meteor-accounts-soundcloud.git",
+        "branch": "master"
+      }
+    },
+    "packages": {
+      "accounts-soundcloud": {
+        "git": "https://github.com/sylvaingi/meteor-accounts-soundcloud.git",
+        "branch": "master",
+        "commit": "7a9b17fad67e3a25d79fc907a41543c3d3aee625"
+      }
+    }
+  }
+}

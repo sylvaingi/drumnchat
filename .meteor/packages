@@ -10,3 +10,6 @@ less
 bootstrap
 http
 accounts-base
+accounts-oauth2-helper
+accounts-soundcloud
+accounts-ui
