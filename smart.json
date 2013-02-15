@@ -1,7 +1,6 @@
 {
   "meteor": {
-    "git": "https://github.com/meteor/meteor.git",
-    "branch": "master"
+    "git": "https://github.com/sylvaingi/meteor.git"
   },
   "packages": {
     "accounts-soundcloud": {

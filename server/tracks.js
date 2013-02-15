@@ -81,14 +81,4 @@
         sc.user = _.pick(scData.user, 'username', 'avatar_url', 'permalink_url');
         return sc;
     }
-
-    Tracks.addVote = function(_id, userId){
-        var playing = Tracks.playingTrack();
-        if(_id === playing._id){
-            console.log("Ignoring vote for playing track");
-            return;
-        }
-
-        Tracks.update(_id, {$addToSet: {votes: userId}});
-    };
 }());

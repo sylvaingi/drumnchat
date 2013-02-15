@@ -1,17 +1,21 @@
-Handlebars.registerHelper("user-avatar", function(user, size){
-    if(!user.services){
-        return;
+Handlebars.registerHelper("user-avatar", function(user){
+    var services = user.services;
+    var url;
+
+    if(services.soundcloud){
+        url = services.soundcloud.avatar_url;
     }
-    
-    var url = user.services.soundcloud.avatar_url;
-    if(_.isString(size)){
-        url = url.replace("large", size);
+    else if(services.google){
+        url = services.google.picture;
+    }
+    else if(services.facebook){
+        url = services.facebook.picture.data.url;
     }
 
     var username = Handlebars._escape(user.profile.name);
     url = Handlebars._escape(url);
 
     return new Handlebars.SafeString(
-        "<img src='"+url+"' alt='"+username+"'/>"
+        "<img class='user-avatar' src='"+url+"' alt='"+username+"'/>"
     );
 });
