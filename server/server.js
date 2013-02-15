@@ -10,7 +10,12 @@ Meteor.startup(function(){
 
     var SC = Accounts.loginServiceConfiguration
                     .findOne({service: "soundcloud"});
-    DNC.SC_clientId = SC.clientId;
+    if(SC){
+        DNC.SC_clientId = SC.clientId;
+    }
+    else {
+        console.log("Warning! SC account is not configured!");
+    }
 
     DNC.tick();
 });
