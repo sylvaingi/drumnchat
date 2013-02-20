@@ -6,7 +6,6 @@
         DNC.Rooms.find().forEach(function(room){
             var roomId = room._id;
             if(DNC.Tracks.playlist(roomId).count() === 0){
-                console.log("No tracks in room "+roomId);
                 return;
             }
 
