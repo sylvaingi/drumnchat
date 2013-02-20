@@ -24,7 +24,7 @@ Meteor.publish("userData", function () {
             memo[field] = 1;
             return memo;
         }, 
-        {active: 1, 'profile.name': 1}
+        {active: 1, 'profile.name': 1, 'room_id':1}
     );
 
     return Meteor.users.find({}, {fields: fieldSpec});
