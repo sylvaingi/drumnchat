@@ -1,8 +1,9 @@
 (function(){
 
-    Meteor.subscribe("playlist");
-    Meteor.subscribe("chat");
     Meteor.subscribe("userData");
+    Meteor.subscribe("rooms", function(){
+        DNC.joinRoom();
+    });
 
     DNC.login = function(service){
         switch(service){
@@ -29,11 +30,36 @@
         Meteor.logout();
     };
 
+    DNC.joinRoom = function(roomId){
+        if(!roomId){
+            roomId = localStorage.getItem("lastRoomId") || DNC.Rooms.findOne()._id;
+        }
+        
+        if(Session.equals("roomId", roomId)){
+            return;
+        }
+
+        console.log("Joining room "+roomId);
+
+        if(DNC.p_handle){
+            DNC.p_handle.stop();
+            DNC.c_handle.stop();            
+        }
+
+        DNC.Player.stop();
+
+        localStorage.setItem("lastRoomId", roomId);
+        Session.set("roomId", roomId);        
+        
+        DNC.p_handle = Meteor.subscribe("playlist", roomId);
+        DNC.c_handle = Meteor.subscribe("chat", roomId);
+    };
+
     function startSCPlayer(scData){
         SC.initialize({
             client_id: scData.clientId
         });
-        DNC.Player.start();
+        DNC.Player.init();
     }
     
     Accounts.loginServiceConfiguration.find({service: "soundcloud"})

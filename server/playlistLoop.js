@@ -3,25 +3,27 @@
     var tickInterval = 1000;
 
     function tick(){
-        if(DNC.Tracks.playlist().count() === 0){
-            console.log("No tracks in playlist");
-            nextTick();
-            return;
-        }
+        DNC.Rooms.find().forEach(function(room){
+            var roomId = room._id;
+            if(DNC.Tracks.playlist(roomId).count() === 0){
+                console.log("No tracks in room "+roomId);
+                return;
+            }
 
-        var track = DNC.Tracks.playingTrack();
+            var track = DNC.Tracks.playingTrack(roomId);
 
-        //Load next track
-        if(!track || track.offset > track.sc.duration){
-            DNC.Tracks.nextTrack();
+            //Load next track
+            if(!track || track.offset > track.sc.duration){
+                DNC.Tracks.nextTrack(roomId);
 
-            track = DNC.Tracks.playingTrack();
-            console.log("Next track is '"+track.sc.title+"' with "+track.votes.length+" votes");
-        }
-        else {
-            DNC.Tracks.update(track._id, {$set: {offset: track.offset + tickInterval}});
-            //console.log("Tick: current track '"+track.sc.title+ "' offset "+track.offset);
-        }
+                track = DNC.Tracks.playingTrack(roomId);
+                console.log("Next track in "+room.name+" is '"+track.sc.title+"' with "+track.votes.length+" votes");
+            }
+            else {
+                DNC.Tracks.update(track._id, {$set: {offset: track.offset + tickInterval}});
+            }
+
+        });
 
         nextTick();
     }

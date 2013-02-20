@@ -1,0 +1,13 @@
+<template name="rooms">
+    <ul class="nav nav-pills">
+    {{#each rooms}}
+        {{> room}}
+    {{/each}}    
+    </ul>
+</template>
+
+<template name="room">
+    <li class="{{#if active}}active{{/if}}">
+        <a href="#" data-roomId="{{this._id}}">{{this.name}}</a>
+    </li>
+</template>

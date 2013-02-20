@@ -1,7 +1,7 @@
 (function(){
     Meteor.methods({
-        "onAirOffset": function(){
-            return DNC.Tracks.playingTrack().offset;
+        "onAirOffset": function(roomId){
+            return DNC.Tracks.playingTrack(roomId).offset;
         },
 
         "heartbeat": function(die){
@@ -13,7 +13,7 @@
         "addTrack": function(url){
             DNC.ensureUserIsConnected();
             console.log("Received SC URL '"+url+"'");
-            DNC.Tracks.enqueue(url, this.userId);
+            DNC.Tracks.enqueue(url, this.userId, Meteor.user().room_id);
         }
     });
 }());

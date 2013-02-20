@@ -1,5 +1,15 @@
-Meteor.publish("playlist", function(){
-    return DNC.Tracks.playlist();
+Meteor.publish("playlist", function(room_id){
+    Meteor.users.update({_id: this.userId}, {$set:{room_id: room_id}});
+
+    return DNC.Tracks.playlist(room_id);
+});
+
+Meteor.publish("chat", function(room_id){
+    return DNC.Chat.find({room_id: room_id});
+});
+
+Meteor.publish("rooms", function(){
+    return DNC.Rooms.find();
 });
 
 Meteor.publish("userData", function () {
@@ -18,8 +28,4 @@ Meteor.publish("userData", function () {
     );
 
     return Meteor.users.find({}, {fields: fieldSpec});
-});
-
-Meteor.publish("chat", function(){
-    return DNC.Chat.find();
 });

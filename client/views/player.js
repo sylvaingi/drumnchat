@@ -2,7 +2,11 @@
     "use strict";
     
     var Player = {
-        start: function(){
+        _waveform: null,
+
+        init: function(){
+            Player._waveform = $(".waveform");
+             
             DNC.Player.playingHandle = DNC.Tracks.find({playing: true}).observe({
                 added: function(track){
                     playTrack(track);
@@ -21,13 +25,15 @@
             if(Player.stream){
                 Player.stream.destruct();
             }
+            Player._waveform.empty();
+            Session.set("DNC.Player.playing", null);
         }
     };
 
     function playTrack(track){
         DNC.Player.stop();
 
-        Meteor.call("onAirOffset", function(error,result){
+        Meteor.call("onAirOffset", Session.get("roomId"), function(error,result){
             console.log("Playing track offset is "+ result);
             track._offset = result;
         });
@@ -53,7 +59,7 @@
 
     function optsForWaveform(track){
         var waveform = new Waveform({
-            container: $(".waveform").empty()[0]
+            container: Player._waveform.empty()[0]
         });
         waveform.dataFromSoundCloudTrack(track.sc);
 

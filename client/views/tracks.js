@@ -1,5 +1,5 @@
 Template.playlist.tracks = function () {
-    return DNC.Tracks.playlist();
+    return DNC.Tracks.playlist(Session.get("roomId"));
 };
 
 Template.track.artwork = function(){

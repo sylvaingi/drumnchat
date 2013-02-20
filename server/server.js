@@ -7,9 +7,12 @@ Meteor.startup(function(){
     DNC.Tracks.update({"sc.id": 69941995}, {$set: {votes: 10}});
     DNC.Tracks.update({"sc.id": 75409800}, {$set: {votes: 5}});*/
 
+    if(DNC.Rooms.find().count() === 0){
+        DNC.Rooms.insert({name: "Room 1"});
+        DNC.Rooms.insert({name: "Room 2"});
+    }
 
-    var SC = Accounts.loginServiceConfiguration
-                    .findOne({service: "soundcloud"});
+    var SC = Accounts.loginServiceConfiguration.findOne({service: "soundcloud"});
     if(SC){
         DNC.SC_clientId = SC.clientId;
     }
