@@ -1,9 +1,15 @@
 <template name="rooms">
-    <ul class="nav nav-pills">
+    <ul class="nav nav-pills" style="display: inline-block;vertical-align: top;">
     {{#each rooms}}
         {{> room}}
     {{/each}}    
     </ul>
+    <form action="#" style="display: inline-block;vertical-align: top;">
+        <div class="input-append">
+            <input class="input-medium" type="text" required>
+            <button class="btn" type="submit">+</button>
+        </div>
+    </form>
 </template>
 
 <template name="room">
