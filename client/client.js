@@ -31,12 +31,12 @@
     };
 
     DNC.joinRoom = function(roomId){
+        if(roomId && Session.equals("roomId", roomId)){
+            return;
+        }
+
         if(!roomId){
             roomId = localStorage.getItem("lastRoomId") || DNC.Rooms.findOne()._id;
-        }
-        
-        if(Session.equals("roomId", roomId)){
-            return;
         }
 
         console.log("Joining room "+roomId);
@@ -54,23 +54,19 @@
         DNC.p_handle = Meteor.subscribe("playlist", roomId);
         DNC.c_handle = Meteor.subscribe("chat", roomId);
     };
-
-    function startSCPlayer(scData){
-        SC.initialize({
-            client_id: scData.clientId
-        });
-        DNC.Player.init();
-    }
     
-    Accounts.loginServiceConfiguration.find({service: "soundcloud"})
-        .observe({added: startSCPlayer});
-
-    Meteor.autorun(function(){
-        if(!DNC.initHB && Meteor.userId()){
-            DNC.initHB = true;
-            Meteor.call("heartbeat");
-        }
-    });
+    //Start playback as soon as the server sends us the SC clientId
+    Accounts.loginServiceConfiguration
+        .find({service: "soundcloud"}).observe({
+            added: function(scData){
+                SC.initialize({
+                    client_id: scData.clientId
+                });
+                DNC.Player.init();
+           
+                Meteor.call("heartbeat");
+            }
+        });
 
     Meteor.setInterval(function(){
         Session.set("now", moment());
