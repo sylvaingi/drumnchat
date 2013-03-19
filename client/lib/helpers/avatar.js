@@ -9,7 +9,7 @@ Handlebars.registerHelper("user-avatar", function(user){
         url = services.google.picture;
     }
     else if(services.facebook){
-        url = services.facebook.picture.data.url;
+        url = "http://graph.facebook.com/" + services.facebook.username + "/picture";
     }
 
     var username = Handlebars._escape(user.profile.name);

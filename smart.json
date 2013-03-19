@@ -1,6 +1,6 @@
 {
   "meteor": {
-    "git": "https://github.com/sylvaingi/meteor.git"
+    "tag": "v0.5.8"
   },
   "packages": {
     "accounts-soundcloud": {

@@ -18,7 +18,8 @@ Meteor.publish("userData", function () {
             'services.soundcloud.permalink_url',
             'services.soundcloud.avatar_url',
             'services.google.picture',
-            'services.facebook.picture.data.url'
+            'services.facebook.username',
+            'services.facebook.link'
         ], 
         function(memo, field){
             memo[field] = 1;
