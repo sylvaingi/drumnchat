@@ -7,7 +7,6 @@ preserve-inputs
 madewith
 underscore
 less
-bootstrap
 http
 accounts-base
 accounts-oauth2-helper
