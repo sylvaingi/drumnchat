@@ -78,8 +78,9 @@
             }
         });
 
+    Session.set("now", moment().valueOf());
     Meteor.setInterval(function(){
-        Session.set("now", moment());
+        Session.set("now", moment().valueOf());
         Meteor.call("heartbeat");
     }, 30000);
 }());

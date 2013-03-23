@@ -1,22 +1,30 @@
 <template name="chat">
-    <div class="chat">
-        {{#each messages}}
-        {{> message}}
-        {{/each}}
-    </div>
-    {{> chat-form}}
-</template>
-
-<template name="message">
-    <div class="chat-message">
-        {{user-avatar chatUser}}
-        {{message}} {{date-ago date}} 
+    <div class="well chat-box minimized">
+        <a href="#" class="minimize-btn"><i class="icon-circle-arrow-right"></i></a>
+        <ul class="chat unstyled">
+            {{#each messages}}
+                {{> chatMessage}}
+            {{/each}}
+        </ul>
+        {{> chatForm}}
     </div>
 </template>
 
-<template name="chat-form">
+<template name="chatMessage">
+    <li class="chat-message">
+        {{userAvatar chatUser}}
+        <div class="message-contents">
+            <p class="small-date">{{dateAgo date}}</p>
+            <p>{{message}}</p>
+        </div>
+    </li>
+</template>
+
+<template name="chatForm">
     <form action="#" class="form-inline">
-        <input type="text" class="input-large" required>
-        <button type="submit" class="btn">Send</button>
+        <div class="input-append">
+            <input type="text" class="input-large" required>
+            <button type="submit" class="btn">Send</button>
+        </div>
     </form>
 </template>

@@ -16,8 +16,13 @@ input {
 }
 
 body {
+    position: relative;
     padding-top: 70px;
     overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.main-container {
 }
 
 .social-item:hover [class^="icon-"]{
@@ -142,6 +147,76 @@ $track-height: 100px;
 
     .track-vote-count {
         font-size: 2em;
+    }
+}
+
+$chatbox-width: 500px;
+div.chat-box {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: $chatbox-width;
+    height: 500px;
+    padding: 5px;
+    z-index: 2;
+    @include transition(right 0.5s);
+
+    &.minimized {
+        right: - $chatbox-width + 40;
+
+        &:hover {
+            right: -$chatbox-width + 80;
+        }
+    }
+
+    &.maximized {
+        right: 0;
+    }
+
+    .minimize-btn{
+        position: absolute;
+        top: 5px;
+        right: 30px;
+        font-size: 28px;
+        text-decoration: none;
+        z-index: 1;
+    }
+
+    .chat {
+        height: 450px;
+        margin: 0;
+        overflow-y: scroll;
+    }
+
+    form {
+        height: 40px;
+        text-align: center;
+        input {
+            width: 420px;
+        }
+    }
+}
+
+.chat-message {
+    position: relative;
+    min-height: 50px;
+    padding-left: 60px;
+    margin-bottom: 10px;
+    .user-avatar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50px;
+        height: 50px;
+    }
+    .message-contents {
+        .small-date {
+            font-size: 0.7em;
+            line-height: 1em;
+        }
+        p {
+            margin: 0;
+        }
     }
 }
 

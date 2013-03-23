@@ -19,6 +19,6 @@ Handlebars.registerHelper("userAvatar", function(user){
     url = Handlebars._escape(url);
 
     return new Handlebars.SafeString(
-        "<img class='user-avatar' src='"+url+"' alt='"+username+"'/>"
+        "<img class='user-avatar' src='"+url+"' alt='"+username+"' title='"+username+"'/>"
     );
 });
