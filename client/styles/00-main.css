@@ -182,7 +182,20 @@ div.chat-box.minimized:hover {
 div.chat-box.maximized {
   right: 0;
 }
-/* line 176, ../.sass/00-main.scss */
+/* line 175, ../.sass/00-main.scss */
+div.chat-box.maximized .chat-btn {
+  display: none;
+}
+/* line 180, ../.sass/00-main.scss */
+div.chat-box .chat-btn {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 50px;
+  font-size: 28px;
+  z-index: 1;
+}
+/* line 189, ../.sass/00-main.scss */
 div.chat-box .minimize-btn {
   position: absolute;
   top: 5px;
@@ -191,30 +204,30 @@ div.chat-box .minimize-btn {
   text-decoration: none;
   z-index: 1;
 }
-/* line 185, ../.sass/00-main.scss */
+/* line 198, ../.sass/00-main.scss */
 div.chat-box .chat {
   height: 450px;
   margin: 0;
   overflow-y: scroll;
 }
-/* line 191, ../.sass/00-main.scss */
+/* line 204, ../.sass/00-main.scss */
 div.chat-box form {
   height: 40px;
   text-align: center;
 }
-/* line 194, ../.sass/00-main.scss */
+/* line 207, ../.sass/00-main.scss */
 div.chat-box form input {
   width: 420px;
 }
 
-/* line 200, ../.sass/00-main.scss */
+/* line 213, ../.sass/00-main.scss */
 .chat-message {
   position: relative;
   min-height: 50px;
   padding-left: 60px;
   margin-bottom: 10px;
 }
-/* line 205, ../.sass/00-main.scss */
+/* line 218, ../.sass/00-main.scss */
 .chat-message .user-avatar {
   position: absolute;
   top: 0;
@@ -222,21 +235,21 @@ div.chat-box form input {
   width: 50px;
   height: 50px;
 }
-/* line 213, ../.sass/00-main.scss */
+/* line 226, ../.sass/00-main.scss */
 .chat-message .message-contents .small-date {
   font-size: 0.7em;
   line-height: 1em;
 }
-/* line 217, ../.sass/00-main.scss */
+/* line 230, ../.sass/00-main.scss */
 .chat-message .message-contents p {
   margin: 0;
 }
 
-/* line 223, ../.sass/00-main.scss */
+/* line 236, ../.sass/00-main.scss */
 footer {
   margin-top: 40px;
 }
-/* line 225, ../.sass/00-main.scss */
+/* line 238, ../.sass/00-main.scss */
 footer .well {
   display: inline-block;
 }
