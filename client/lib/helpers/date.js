@@ -1,4 +1,4 @@
-Handlebars.registerHelper("date-ago", function(date){
+Handlebars.registerHelper("dateAgo", function(date){
     var m = moment(date);
     var now = moment(Session.get("now"));
 

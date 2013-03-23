@@ -26,7 +26,6 @@
 
     DNC.logout = function(){
         Meteor.call("heartbeat", true);
-        DNC.initHB = false;
         Meteor.logout();
     };
 

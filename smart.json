@@ -5,6 +5,9 @@
   "packages": {
     "accounts-soundcloud": {
       "git": "https://github.com/sylvaingi/meteor-accounts-soundcloud.git"
+    },
+    "router": {
+      "git": "https://github.com/sylvaingi/meteor-router.git"
     }
   }
 }

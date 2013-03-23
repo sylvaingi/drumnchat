@@ -1,0 +1,19 @@
+/* line 1, ../.sass/screen.scss */
+.social-item:hover [class^="icon-"] {
+  color: #fff;
+}
+
+/* line 5, ../.sass/screen.scss */
+.icon-soundcloud {
+  color: #fc3f00;
+}
+
+/* line 9, ../.sass/screen.scss */
+.icon-facebook-sign {
+  color: #3B5998;
+}
+
+/* line 13, ../.sass/screen.scss */
+.current-user {
+  display: inline-block;
+}

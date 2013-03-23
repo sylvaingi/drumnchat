@@ -1,4 +1,4 @@
-Handlebars.registerHelper("user-avatar", function(user){
+Handlebars.registerHelper("userAvatar", function(user){
     var services = user.services;
     var url;
 
