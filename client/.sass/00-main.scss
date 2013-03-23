@@ -152,7 +152,7 @@ $track-height: 100px;
 
 $chatbox-width: 500px;
 div.chat-box {
-    position: absolute;
+    position: fixed;
     top: 70px;
     right: 0;
     width: $chatbox-width;

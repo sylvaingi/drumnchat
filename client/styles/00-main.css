@@ -158,7 +158,7 @@ body {
 
 /* line 154, ../.sass/00-main.scss */
 div.chat-box {
-  position: absolute;
+  position: fixed;
   top: 70px;
   right: 0;
   width: 500px;
