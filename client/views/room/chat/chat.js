@@ -22,7 +22,7 @@
     };
 
     Template.chatMessage.chatUser = function(){
-        return Meteor.users.findOne({_id: this.user_id});
+        return Meteor.users.findOne({_id: this.userId});
     };
 
     Template.chatMessage.rendered = function(){

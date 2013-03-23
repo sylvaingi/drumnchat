@@ -189,8 +189,8 @@ div.chat-box.maximized .chat-btn {
 /* line 180, ../.sass/00-main.scss */
 div.chat-box .chat-btn {
   position: absolute;
-  top: 5px;
-  left: 5px;
+  top: 0;
+  left: 0;
   width: 50px;
   font-size: 28px;
   z-index: 1;

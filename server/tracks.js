@@ -5,7 +5,7 @@
 
     Tracks.nextTrack = function(roomId){
         Tracks.stopTrack(roomId);
-        var track = Tracks.findOne({room_id: roomId, playing: false}, {sort: Tracks.trackSort});
+        var track = Tracks.findOne({roomId: roomId, playing: false}, {sort: Tracks.trackSort});
 
         var result = Meteor.http.get("http://api.soundcloud.com/tracks/"+track.sc.id, {
             params : {client_id: DNC.SC_clientId, format:'json'}
@@ -43,7 +43,7 @@
             throw new Meteor.Error(400, "Track duration is too long");
         }
         
-        var track = Tracks.findOne({room_id: roomId, "sc.id":result.data.id});
+        var track = Tracks.findOne({roomId: roomId, "sc.id":result.data.id});
         if(track){
             console.log("Track '"+result.data.title+"' is already enqueued, voting instead");
             Tracks.addVote(track._id);  
@@ -57,7 +57,7 @@
             playing: false,
             addedOn: new Date(),
             sc: sc,
-            room_id: roomId   
+            roomId: roomId   
         });
     };
 

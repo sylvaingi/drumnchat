@@ -1,11 +1,11 @@
-Meteor.publish("playlist", function(room_id){
-    Meteor.users.update({_id: this.userId}, {$set:{room_id: room_id}});
+Meteor.publish("playlist", function(roomId){
+    Meteor.users.update({_id: this.userId}, {$set:{roomId: roomId}});
 
-    return DNC.Tracks.playlist(room_id);
+    return DNC.Tracks.playlist(roomId);
 });
 
-Meteor.publish("chat", function(room_id){
-    return DNC.Chat.find({room_id: room_id});
+Meteor.publish("chat", function(roomId){
+    return DNC.Chat.find({roomId: roomId});
 });
 
 Meteor.publish("rooms", function(){
@@ -25,7 +25,7 @@ Meteor.publish("userData", function () {
             memo[field] = 1;
             return memo;
         }, 
-        {active: 1, 'profile.name': 1, 'room_id':1}
+        {active: 1, 'profile.name': 1, 'roomId':1}
     );
 
     return Meteor.users.find({}, {fields: fieldSpec});
