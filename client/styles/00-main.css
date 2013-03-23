@@ -153,3 +153,12 @@ body {
 .track-vote .track-vote-count {
   font-size: 2em;
 }
+
+/* line 148, ../.sass/00-main.scss */
+footer {
+  margin-top: 40px;
+}
+/* line 150, ../.sass/00-main.scss */
+footer .well {
+  display: inline-block;
+}
