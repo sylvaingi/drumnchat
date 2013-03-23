@@ -21,8 +21,8 @@
             if(Player.stream){
                 Player.stream.destruct();
             }
-            DNC.Player.onLoading = null;
-            DNC.Player.onPlaying = null;
+            Player.onLoading = null;
+            Player.onPlaying = null;
             Session.set("DNC.Player.playing", null);
         }
     };
@@ -69,8 +69,13 @@
                 this.setPosition(track._offset + latencyComp);
                 this.play();
             }
-        } 
+        }
     }
+
+    Deps.autorun(function(){
+        Meteor.Router.page();
+        Player.stop();
+    });
 
     DNC.Player = Player;
 
