@@ -2,9 +2,13 @@
 
     Meteor.subscribe("userData");
 
-    var roomsReady = false;
+    //Use a duplicated non-reactive var for the router function
+    var roomsLoading = true;
+    Session.set('rooms.loading', true);
+
     Meteor.subscribe("rooms", function(){
-        roomsReady = true;
+        roomsLoading = false;
+        Session.set('rooms.loading', false);
     });
 
     DNC.login = function(service){
@@ -37,7 +41,7 @@
         "/room/:id": function(roomId){
             console.log("Joining room "+roomId);
 
-            if(roomsReady && !DNC.Rooms.findOne(roomId)){
+            if(!roomsLoading && !DNC.Rooms.findOne(roomId)){
                 Meteor.Router.to('/404');
             }
 
@@ -50,7 +54,11 @@
 
             Session.set("roomId", roomId);        
             
-            DNC.p_handle = Meteor.subscribe("playlist", roomId);
+            Session.set("playlist.loading", true);        
+            DNC.p_handle = Meteor.subscribe("playlist", roomId, function(){
+                Session.set("playlist.loading", false);        
+            });
+            
             DNC.c_handle = Meteor.subscribe("chat", roomId);
 
             return "room";

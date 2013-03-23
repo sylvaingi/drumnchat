@@ -17,6 +17,7 @@ input {
 
 body {
     padding-top: 70px;
+    overflow-y: scroll;
 }
 
 .social-item:hover [class^="icon-"]{
@@ -35,6 +36,12 @@ body {
     img {
         height: 25px;
     }
+}
+
+.loader {
+    width: 150px;
+    margin: 0 auto 20px auto;
+    text-align: center;
 }
 
 .room-form{

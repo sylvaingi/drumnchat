@@ -2,6 +2,10 @@ Template.tracklist.tracks = function () {
     return DNC.Tracks.playlist(Session.get("roomId"));
 };
 
+Template.tracklist.tracklistLoading = function () {
+    return Session.get("playlist.loading");
+};
+
 Template.track.artwork = function(){
     return this.sc.artwork_url || this.sc.user.avatar_url;
 };

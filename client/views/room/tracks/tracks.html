@@ -1,13 +1,17 @@
 <template name="tracklist">
-    <div class="tracklist">
-        {{#each tracks}}
-            {{> track}}
-        {{/each}}
-    </div>
+    {{#if tracklistLoading}}
+        {{> loader}}
+    {{else}}
+        <ul class="tracklist">
+            {{#each tracks}}
+                {{> track}}
+            {{/each}}
+        </ul>
+    {{/if}}
 </template>
 
 <template name="track">
-    <div class="track {{#if playing}}track-playing{{/if}}">  
+    <li class="track {{#if playing}}track-playing{{/if}}">  
         <img class="track-artwork" src="{{artwork}}" alt="{{title}}">
         <div class="track-info">
             <div class="waveform"></div>
@@ -19,6 +23,5 @@
             {{/unless}}
             <p class="track-vote-count">{{votes.length}}</p>
         </div>
-    </div>
-
+    </li>
 </template> 

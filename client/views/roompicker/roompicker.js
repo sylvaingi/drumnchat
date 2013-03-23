@@ -1,4 +1,7 @@
 Template.roompicker.helpers({
+    roomsLoading: function(){
+        return Session.get("rooms.loading");
+    },
     rooms: DNC.Rooms.find({})
 });
 

@@ -6,14 +6,14 @@
             DNC.Player.playingHandle = DNC.Tracks.find({playing: true}).observe({
                 added: function(track){
                     playTrack(track);
-                    Session.set("DNC.Player.playing", track);
+                    Session.set("player.playing", track);
                 }
             });
         },
 
         toggleMute: function(){
             Player.muted = !!!Player.muted;
-            Session.set("DNC.Player.muted", Player.muted);
+            Session.set("player.muted", Player.muted);
             Player.stream.toggleMute();
         },
 
@@ -23,7 +23,7 @@
             }
             Player.onLoading = null;
             Player.onPlaying = null;
-            Session.set("DNC.Player.playing", null);
+            Session.set("player.playing", null);
         }
     };
 

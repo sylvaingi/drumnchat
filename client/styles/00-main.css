@@ -15,39 +15,47 @@ input {
 /* line 18, ../.sass/00-main.scss */
 body {
   padding-top: 70px;
+  overflow-y: scroll;
 }
 
-/* line 22, ../.sass/00-main.scss */
+/* line 23, ../.sass/00-main.scss */
 .social-item:hover [class^="icon-"] {
   color: #fff;
 }
 
-/* line 26, ../.sass/00-main.scss */
+/* line 27, ../.sass/00-main.scss */
 .icon-soundcloud {
   color: #fc3f00;
 }
 
-/* line 30, ../.sass/00-main.scss */
+/* line 31, ../.sass/00-main.scss */
 .icon-facebook-sign {
   color: #3B5998;
 }
 
-/* line 35, ../.sass/00-main.scss */
+/* line 36, ../.sass/00-main.scss */
 .current-user img {
   height: 25px;
 }
 
-/* line 40, ../.sass/00-main.scss */
+/* line 41, ../.sass/00-main.scss */
+.loader {
+  width: 150px;
+  margin: 0 auto 20px auto;
+  text-align: center;
+}
+
+/* line 47, ../.sass/00-main.scss */
 .room-form {
   margin-top: 40px;
 }
 
-/* line 44, ../.sass/00-main.scss */
+/* line 51, ../.sass/00-main.scss */
 .room-header {
   position: relative;
   margin-bottom: 20px;
 }
-/* line 48, ../.sass/00-main.scss */
+/* line 55, ../.sass/00-main.scss */
 .room-header form {
   position: absolute;
   bottom: 15px;
@@ -55,7 +63,7 @@ body {
   margin: 0;
 }
 
-/* line 58, ../.sass/00-main.scss */
+/* line 65, ../.sass/00-main.scss */
 .track {
   position: relative;
   height: 100px;
@@ -64,16 +72,16 @@ body {
   border-right: 3px solid;
   border-color: #f09609;
 }
-/* line 67, ../.sass/00-main.scss */
+/* line 74, ../.sass/00-main.scss */
 .track.track-playing .track-vote-count {
   line-height: 100px;
 }
-/* line 71, ../.sass/00-main.scss */
+/* line 78, ../.sass/00-main.scss */
 .track.track-playing .waveform {
   display: block;
 }
 
-/* line 77, ../.sass/00-main.scss */
+/* line 84, ../.sass/00-main.scss */
 .track-artwork {
   position: absolute;
   top: 0;
@@ -83,14 +91,14 @@ body {
   text-align: center;
 }
 
-/* line 86, ../.sass/00-main.scss */
+/* line 93, ../.sass/00-main.scss */
 .track-info {
   position: relative;
   padding: 0 10px;
   height: 100%;
   line-height: 100px;
 }
-/* line 91, ../.sass/00-main.scss */
+/* line 98, ../.sass/00-main.scss */
 .track-info h3 {
   position: relative;
   display: inline-block;
@@ -102,15 +110,15 @@ body {
   vertical-align: middle;
   z-index: 1;
 }
-/* line 100, ../.sass/00-main.scss */
+/* line 107, ../.sass/00-main.scss */
 .track-info h3 a {
   color: inherit;
 }
-/* line 102, ../.sass/00-main.scss */
+/* line 109, ../.sass/00-main.scss */
 .track-info h3 a:hover {
   text-decoration: none;
 }
-/* line 108, ../.sass/00-main.scss */
+/* line 115, ../.sass/00-main.scss */
 .track-info .waveform {
   display: none;
   position: absolute;
@@ -123,7 +131,7 @@ body {
   z-index: 0;
 }
 
-/* line 121, ../.sass/00-main.scss */
+/* line 128, ../.sass/00-main.scss */
 .track-vote {
   position: absolute;
   top: 0;
@@ -132,16 +140,16 @@ body {
   height: 100px;
   text-align: center;
 }
-/* line 128, ../.sass/00-main.scss */
+/* line 135, ../.sass/00-main.scss */
 .track-vote a {
   font-size: 4em;
   vertical-align: middle;
 }
-/* line 131, ../.sass/00-main.scss */
+/* line 138, ../.sass/00-main.scss */
 .track-vote a:hover {
   text-decoration: none;
 }
-/* line 136, ../.sass/00-main.scss */
+/* line 143, ../.sass/00-main.scss */
 .track-vote .track-vote-count {
   font-size: 2em;
 }
