@@ -2,12 +2,28 @@
 <ul class="thumbnails roompicker">
     {{#each rooms}}
         {{> roomTile}}
-    {{/each}} 
+    {{/each}}
+    {{> roomTileAdd}} 
 </ul>
 </template>
 
 <template name="roomTile">
-    <li class="span3 tile tile-double tile-teal">
+    <li class="span3 tile tile-double tile-orange">
         <a href="/room/{{this._id}}"><h2 class="tile-text">{{this.name}}</h2></a>
     </li>
+</template>
+
+<template name="roomTileAdd">
+    <li class="span3 tile tile-double tile-green tile-add">
+        <a href="#"><h2 class="tile-text"><i class="icon-plus-sign-alt"></i>Add</h2></a>
+    </li>
+</template>
+
+<template name="roomTileAddForm">
+    <form action='#' class="inline-form room-form">
+    <div class="input-append">
+        <input type="text" class="input-small" required placeholder="Room name" autofocus>
+        <button class="btn">OK</button>
+    </div>
+    </form>
 </template>

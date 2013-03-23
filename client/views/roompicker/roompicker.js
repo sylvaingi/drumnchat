@@ -2,18 +2,22 @@ Template.roompicker.helpers({
     rooms: DNC.Rooms.find({})
 });
 
-/*DNC.createRoom = function(roomName){
-    Meteor.call("createRoom", roomName, function(error, roomId){
-        if(roomId){
-            DNC.joinRoom(roomId);
-        }
-    });
-};
-
-Template.rooms.events({
-    submit: function(event, template){
+Template.roomTileAdd.events({
+    "click a": function(event, template){
         event.preventDefault();
-        DNC.createRoom(template.find("input").value);
-        event.currentTarget.reset();
+        template.lastNode.innerHTML = Template.roomTileAddForm();
+    },
+
+    "submit": function(event, template){
+        event.preventDefault();
+        var name = template.find("input").value;
+
+        Meteor.call("createRoom", name, function(error, roomId){
+            if(error){
+                alert(error.reason);
+                return;
+            }
+            Meteor.Router.to("/room/" + roomId);
+        });
     }
-});*/
+});
