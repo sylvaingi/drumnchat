@@ -2,6 +2,7 @@ drumnchat
 =========
 
 Soundrop-like app based on the wonderful JS framework Meteor (http://meteor.com/).
+
 A live demo is available at http://drumnchat.meteor.com/
 
 Installation
