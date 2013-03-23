@@ -1,3 +1,7 @@
 <template name="room">
-    {{room.name}}
+    <div class="room-header">
+        <h1>{{room.name}}</h1>
+        {{> trackform}}
+    </div>
+    {{> tracklist}}
 </template>

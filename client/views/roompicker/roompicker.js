@@ -1,7 +1,3 @@
-Meteor.Router.add({
-    "/": "roompicker"
-});
-
 Template.roompicker.helpers({
     rooms: DNC.Rooms.find({})
 });

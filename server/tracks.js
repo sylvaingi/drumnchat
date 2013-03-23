@@ -56,7 +56,6 @@
             votes: [userId],
             playing: false,
             addedOn: new Date(),
-            lastPlayed: new Date(0),
             sc: sc,
             room_id: roomId   
         });
@@ -71,7 +70,7 @@
         var setAttrs = {
             sc: track._sc,
             votes: [],
-            lastPlayed: new Date(),
+            addedOn: new Date(),
             playing: false
         };
         Tracks.update(track._id, {$set: setAttrs, $unset:{offset: "", _sc:""}});

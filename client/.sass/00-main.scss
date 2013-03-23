@@ -1,0 +1,133 @@
+@import "compass/css3";
+@import "compass/utilities";
+
+@mixin text-ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+* { 
+    @include box-sizing(border-box);
+}
+
+input {
+    @include box-sizing(content-box);
+}
+
+body {
+    padding-top: 70px;
+}
+
+.social-item:hover [class^="icon-"]{
+    color: #fff;
+}
+
+.icon-soundcloud{
+    color: #fc3f00;
+}
+
+.icon-facebook-sign {
+    color: #3B5998;
+}
+
+.current-user{
+    img {
+        height: 25px;
+    }
+}
+
+.room-header {
+    position: relative;
+
+    form {
+        position: absolute;
+        bottom: 10px;
+        right: 0;
+        margin: 0;
+    }
+}
+
+$track-height: 100px;
+
+.track {
+    position: relative;
+    height: $track-height;
+    margin-bottom: 10px;
+    padding: 0 $track-height; 
+    border-right: 3px solid;
+    border-color: #f09609;
+
+    &.track-playing {
+        .track-vote-count{
+            line-height: $track-height;
+        }
+
+        .waveform {
+            display: block;
+        }
+    }
+}
+
+.track-artwork{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: $track-height;
+    height: $track-height;
+    text-align: center;
+}
+
+.track-info{
+    position: relative;
+    padding: 0 10px;
+    height: 100%;
+    line-height: $track-height;
+    h3 {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        @include text-ellipsis;
+        text-transform: none;
+        vertical-align: middle;
+        z-index: 1;
+    
+        a {
+            color: inherit;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+
+    .waveform {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        z-index: 0;
+    }
+}
+
+.track-vote {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: $track-height;
+    height: $track-height;
+    text-align: center;
+    a {
+        font-size: 4em;
+        vertical-align: middle;
+        &:hover{
+            text-decoration: none;
+        }
+    }
+
+    .track-vote-count {
+        font-size: 2em;
+    }
+}

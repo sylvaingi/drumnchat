@@ -1,0 +1,140 @@
+/* line 10, ../.sass/00-main.scss */
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* line 14, ../.sass/00-main.scss */
+input {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+/* line 18, ../.sass/00-main.scss */
+body {
+  padding-top: 70px;
+}
+
+/* line 22, ../.sass/00-main.scss */
+.social-item:hover [class^="icon-"] {
+  color: #fff;
+}
+
+/* line 26, ../.sass/00-main.scss */
+.icon-soundcloud {
+  color: #fc3f00;
+}
+
+/* line 30, ../.sass/00-main.scss */
+.icon-facebook-sign {
+  color: #3B5998;
+}
+
+/* line 35, ../.sass/00-main.scss */
+.current-user img {
+  height: 25px;
+}
+
+/* line 40, ../.sass/00-main.scss */
+.room-header {
+  position: relative;
+}
+/* line 43, ../.sass/00-main.scss */
+.room-header form {
+  position: absolute;
+  bottom: 10px;
+  right: 0;
+  margin: 0;
+}
+
+/* line 53, ../.sass/00-main.scss */
+.track {
+  position: relative;
+  height: 100px;
+  margin-bottom: 10px;
+  padding: 0 100px;
+  border-right: 3px solid;
+  border-color: #f09609;
+}
+/* line 62, ../.sass/00-main.scss */
+.track.track-playing .track-vote-count {
+  line-height: 100px;
+}
+/* line 66, ../.sass/00-main.scss */
+.track.track-playing .waveform {
+  display: block;
+}
+
+/* line 72, ../.sass/00-main.scss */
+.track-artwork {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+}
+
+/* line 81, ../.sass/00-main.scss */
+.track-info {
+  position: relative;
+  padding: 0 10px;
+  height: 100%;
+  line-height: 100px;
+}
+/* line 86, ../.sass/00-main.scss */
+.track-info h3 {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-transform: none;
+  vertical-align: middle;
+  z-index: 1;
+}
+/* line 95, ../.sass/00-main.scss */
+.track-info h3 a {
+  color: inherit;
+}
+/* line 97, ../.sass/00-main.scss */
+.track-info h3 a:hover {
+  text-decoration: none;
+}
+/* line 103, ../.sass/00-main.scss */
+.track-info .waveform {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+  z-index: 0;
+}
+
+/* line 115, ../.sass/00-main.scss */
+.track-vote {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+}
+/* line 122, ../.sass/00-main.scss */
+.track-vote a {
+  font-size: 4em;
+  vertical-align: middle;
+}
+/* line 125, ../.sass/00-main.scss */
+.track-vote a:hover {
+  text-decoration: none;
+}
+/* line 130, ../.sass/00-main.scss */
+.track-vote .track-vote-count {
+  font-size: 2em;
+}

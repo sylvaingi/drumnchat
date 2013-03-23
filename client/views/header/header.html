@@ -1,8 +1,8 @@
 <template name="header">
-    <div class="navbar">
+    <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
-                <a href="/" class="brand">DrumNChat Alpha</a>
+                <a href="/" class="brand">DrumNChat α</a>
                 {{> headerUser}}
             </div>
         </div>
@@ -13,17 +13,16 @@
     <ul class="nav pull-right">
         {{#if currentUser}}
         <li class="current-user">
-            {{userAvatar currentUser}}
-            {{currentUser.profile.name}}
+            <a href="#">
+                {{userAvatar currentUser}} {{currentUser.profile.name}}
+            </a>
         </li> 
         <li class="divider-vertical"></span>   
         <li><a href="#" class="disconnect"><i class="icon-off"></i> Disconnect</a></li>
         {{else}}
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="icon-off"></i>
-                Connect
-                <b class="caret"></b>
+                <i class="icon-off"></i> Connect <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
                 <li><a href="#" class="social-item" data-service="facebook"><i class="icon-facebook-sign"></i> Facebook</a></li>
