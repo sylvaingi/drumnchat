@@ -29,6 +29,33 @@
         Meteor.logout();
     };
 
+    Meteor.Router.add({
+        "/": "roompicker",
+        
+        "/room/:id": function(roomId){
+            console.log("Joining room "+roomId);
+
+            if(!DNC.Rooms.findOne(roomId)){
+                Meteor.Router.to('/404');
+            }
+
+            if(DNC.p_handle){
+                DNC.p_handle.stop();
+                DNC.c_handle.stop();            
+            }
+
+            DNC.Player.stop();
+
+            Session.set("roomId", roomId);        
+            
+            DNC.p_handle = Meteor.subscribe("playlist", roomId);
+            DNC.c_handle = Meteor.subscribe("chat", roomId);
+
+            return "room";
+        }
+    });
+
+
     DNC.joinRoom = function(roomId){
         if(roomId && Session.equals("roomId", roomId)){
             return;
@@ -38,20 +65,6 @@
             roomId = localStorage.getItem("lastRoomId") || DNC.Rooms.findOne()._id;
         }
 
-        console.log("Joining room "+roomId);
-
-        if(DNC.p_handle){
-            DNC.p_handle.stop();
-            DNC.c_handle.stop();            
-        }
-
-        DNC.Player.stop();
-
-        localStorage.setItem("lastRoomId", roomId);
-        Session.set("roomId", roomId);        
-        
-        DNC.p_handle = Meteor.subscribe("playlist", roomId);
-        DNC.c_handle = Meteor.subscribe("chat", roomId);
     };
     
     //Start playback as soon as the server sends us the SC clientId

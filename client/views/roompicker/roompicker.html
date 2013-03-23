@@ -1,0 +1,13 @@
+<template name="roompicker">
+<ul class="thumbnails roompicker">
+    {{#each rooms}}
+        {{> roomTile}}
+    {{/each}} 
+</ul>
+</template>
+
+<template name="roomTile">
+    <li class="span3 tile tile-double tile-teal">
+        <a href="/room/{{this._id}}"><h2 class="tile-text">{{this.name}}</h2></a>
+    </li>
+</template>
