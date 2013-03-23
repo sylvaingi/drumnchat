@@ -1,8 +1,10 @@
 (function(){
 
     Meteor.subscribe("userData");
+
+    var roomsReady = false;
     Meteor.subscribe("rooms", function(){
-        DNC.joinRoom();
+        roomsReady = true;
     });
 
     DNC.login = function(service){
@@ -35,7 +37,7 @@
         "/room/:id": function(roomId){
             console.log("Joining room "+roomId);
 
-            if(!DNC.Rooms.findOne(roomId)){
+            if(roomsReady && !DNC.Rooms.findOne(roomId)){
                 Meteor.Router.to('/404');
             }
 
@@ -54,18 +56,6 @@
             return "room";
         }
     });
-
-
-    DNC.joinRoom = function(roomId){
-        if(roomId && Session.equals("roomId", roomId)){
-            return;
-        }
-
-        if(!roomId){
-            roomId = localStorage.getItem("lastRoomId") || DNC.Rooms.findOne()._id;
-        }
-
-    };
     
     //Start playback as soon as the server sends us the SC clientId
     Accounts.loginServiceConfiguration

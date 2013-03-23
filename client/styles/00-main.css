@@ -118,11 +118,12 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
+  overflow: hidden;
   opacity: 0.3;
   z-index: 0;
 }
 
-/* line 120, ../.sass/00-main.scss */
+/* line 121, ../.sass/00-main.scss */
 .track-vote {
   position: absolute;
   top: 0;
@@ -131,16 +132,16 @@ body {
   height: 100px;
   text-align: center;
 }
-/* line 127, ../.sass/00-main.scss */
+/* line 128, ../.sass/00-main.scss */
 .track-vote a {
   font-size: 4em;
   vertical-align: middle;
 }
-/* line 130, ../.sass/00-main.scss */
+/* line 131, ../.sass/00-main.scss */
 .track-vote a:hover {
   text-decoration: none;
 }
-/* line 135, ../.sass/00-main.scss */
+/* line 136, ../.sass/00-main.scss */
 .track-vote .track-vote-count {
   font-size: 2em;
 }
