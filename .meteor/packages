@@ -4,7 +4,6 @@
 # but you can also edit it by hand.
 
 preserve-inputs
-underscore
 less
 http
 accounts-base

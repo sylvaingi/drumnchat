@@ -12,11 +12,11 @@
             var track = DNC.Tracks.playingTrack(roomId);
 
             //Load next track
-            if(!track || track.offset > track.sc.duration){
+            if(!track || track.offset > track.serviceData.duration){
                 DNC.Tracks.nextTrack(roomId);
 
                 track = DNC.Tracks.playingTrack(roomId);
-                console.log("Next track in "+room.name+" is '"+track.sc.title+"' with "+track.votes.length+" votes");
+                console.log("Next track in "+room.name+" is '"+track.serviceData.title+"' with "+track.votes.length+" votes");
             }
             else {
                 DNC.Tracks.update(track._id, {$set: {offset: track.offset + tickInterval}});
