@@ -1,9 +1,9 @@
--(function(){
+(function(){
     "use strict";
-    
+
     var Player = {
-        init: function(){             
-            DNC.Player.playingHandle = DNC.Tracks.find({playing: true}).observe({
+        init: function(){   
+            Player.playingHandle = DNC.Tracks.find({playing: true}).observe({
                 added: function(track){
                     playTrack(track);
                     Session.set("player.playing", track);
@@ -21,6 +21,10 @@
             if(Player.stream){
                 Player.stream.destruct();
             }
+            if(Player.ytplayer){
+                Player.ytplayer.pauseVideo();
+            }
+
             Player.onLoading = null;
             Player.onPlaying = null;
             Session.set("player.playing", null);
@@ -33,15 +37,20 @@
         Meteor.call("onAirOffset", Session.get("roomId"), function(error,result){
             console.log("Playing track offset is "+ result);
             track._offset = result;
+
+            startPlayback(track);
         });
         
         console.log("Playing track", track.serviceData.title, track);
         if(track.type === "sc"){
-            playSoundcloudTrack(track);
+            loadSoundcloudTrack(track);
+        }
+        else if(track.type === "yt"){
+            loadYoutubeTrack(track);
         }
     }
 
-    function playSoundcloudTrack(track){
+    function loadSoundcloudTrack(track){
         var opts = {
             autoLoad: true,
             whileloading: function(){
@@ -77,14 +86,60 @@
         }
     }
 
+    function loadYoutubeTrack(track){
+        Player.ytplayer.cueVideoById(track.serviceData.id, 0, "large");
+    }
+
+    function startPlayback(track){
+        if(track.type === "yt"){
+            Player.ytplayer.seekTo(track._offset / 1000);
+            Player.ytplayer.playVideo();
+        }
+    }
+
+    //Load 3rd party players
+    Session.set("soundcloud.ready", false);
+    Session.set("youtube.ready", false);
+
+    Accounts.loginServiceConfiguration
+        .find({service: "soundcloud"}).observe({
+            added: function(scData){
+                SC.initialize({
+                    client_id: scData.clientId
+                });
+
+                Session.set("soundcloud.ready", true);
+            }
+        });
+
+    window.onYouTubeIframeAPIReady = function(playerid){
+        var ytplayer = new YT.Player("yt-player", {
+          width: "640",
+          height: "480",
+          videoId: "",
+          events: {
+            "onReady": function(){
+                Player.ytplayer = ytplayer;
+                Session.set("youtube.ready", true);
+            },
+            "onError": function(error){
+                console.log("Youtube error: ", error);
+            }
+          }
+        });
+    };
+
+
+    Deps.autorun(function(){
+        if(Session.get("youtube.ready") && Session.get("soundcloud.ready")){
+            Player.init();
+        }
+    });
+
     Deps.autorun(function(){
         Meteor.Router.page();
         Player.stop();
     });
-
-    window.onYouTubePlayerReady = function(playerid){
-        var ytplayer = document.getElementById("yt-player");
-    };
 
     DNC.Player = Player;
 

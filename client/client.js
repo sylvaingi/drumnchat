@@ -64,19 +64,6 @@
             return "room";
         }
     });
-    
-    //Start playback as soon as the server sends us the SC clientId
-    Accounts.loginServiceConfiguration
-        .find({service: "soundcloud"}).observe({
-            added: function(scData){
-                SC.initialize({
-                    client_id: scData.clientId
-                });
-                DNC.Player.init();
-           
-                Meteor.call("heartbeat");
-            }
-        });
 
     Session.set("now", moment().valueOf());
     Meteor.setInterval(function(){
