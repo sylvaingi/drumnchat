@@ -1,8 +1,8 @@
 Handlebars.registerHelper("userAvatar", function(user){
+    if(!user) return;
+    
     var services = user.services;
-    if(!services){
-        return;
-    }
+    if(!services) return;
 
     var url;
     if(services.soundcloud){
