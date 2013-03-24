@@ -7,7 +7,7 @@ Template.tracklist.tracklistLoading = function () {
 };
 
 Template.track.artwork = function(){
-    return this.sc.artwork_url || this.sc.user.avatar_url;
+    return this.serviceData.artwork_url || this.serviceData.user.avatar_url;
 };
 
 Template.track.voters = function(){
@@ -25,7 +25,7 @@ Template.track.events({
 });
 
 Template.track.rendered = function(){
-    if(!this.data.playing){
+    if(!this.data.playing || this.data.type === "yt"){
         return;
     }
 
@@ -34,7 +34,7 @@ Template.track.rendered = function(){
     var waveform = new Waveform({
         container: waveformEl
     });
-    waveform.dataFromSoundCloudTrack(this.data.sc);
+    waveform.dataFromSoundCloudTrack(this.data.serviceData);
 
     var ctx = waveform.context;
     var gradient = ctx.createLinearGradient(0, 0, 0, waveform.height);

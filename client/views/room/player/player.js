@@ -1,4 +1,4 @@
-(function(){
+-(function(){
     "use strict";
     
     var Player = {
@@ -35,20 +35,25 @@
             track._offset = result;
         });
         
-        console.log("Playing track", track.sc.title, track);
+        console.log("Playing track", track.serviceData.title, track);
+        if(track.type === "sc"){
+            playSoundcloudTrack(track);
+        }
+    }
 
+    function playSoundcloudTrack(track){
         var opts = {
             autoLoad: true,
             whileloading: function(){
                 deferPlayAtRequiredOffset.call(this, track);
-                DNC.Player.onLoading && DNC.Player.onLoading.call(this, track);
+                Player.onLoading && Player.onLoading.call(this, track);
             },
             whileplaying:function(){
-                DNC.Player.onPlaying && DNC.Player.onPlaying.call(this, track);
+                Player.onPlaying && Player.onPlaying.call(this, track);
             }
         };
 
-        SC.stream("/tracks/"+track.sc.id, opts, function(stream){
+        SC.stream("/tracks/"+track.serviceData.id, opts, function(stream){
             if(Player.muted){
                 stream.mute();
             }
@@ -76,6 +81,10 @@
         Meteor.Router.page();
         Player.stop();
     });
+
+    window.onYouTubePlayerReady = function(playerid){
+        var ytplayer = document.getElementById("yt-player");
+    };
 
     DNC.Player = Player;
 
