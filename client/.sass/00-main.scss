@@ -25,6 +25,10 @@ body {
 .main-container {
 }
 
+#yt-player{
+    display: none;
+}
+
 .social-item:hover [class^="icon-"]{
     color: #fff;
 }
