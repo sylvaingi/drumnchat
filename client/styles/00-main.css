@@ -89,8 +89,13 @@ body {
 .track.track-playing .waveform {
   display: block;
 }
-
 /* line 95, ../.sass/00-main.scss */
+.track.track-yt .track-artwork {
+  top: 12px;
+  height: auto;
+}
+
+/* line 102, ../.sass/00-main.scss */
 .track-artwork {
   position: absolute;
   top: 0;
@@ -100,18 +105,19 @@ body {
   text-align: center;
 }
 
-/* line 104, ../.sass/00-main.scss */
+/* line 111, ../.sass/00-main.scss */
 .track-info {
   position: relative;
   padding: 0 10px;
   height: 100%;
   line-height: 100px;
 }
-/* line 109, ../.sass/00-main.scss */
+/* line 116, ../.sass/00-main.scss */
 .track-info h3 {
   position: relative;
   display: inline-block;
   width: 100%;
+  padding: 0;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -119,15 +125,15 @@ body {
   vertical-align: middle;
   z-index: 1;
 }
-/* line 118, ../.sass/00-main.scss */
+/* line 126, ../.sass/00-main.scss */
 .track-info h3 a {
   color: inherit;
 }
-/* line 120, ../.sass/00-main.scss */
+/* line 128, ../.sass/00-main.scss */
 .track-info h3 a:hover {
   text-decoration: none;
 }
-/* line 126, ../.sass/00-main.scss */
+/* line 134, ../.sass/00-main.scss */
 .track-info .waveform {
   display: none;
   position: absolute;
@@ -140,7 +146,7 @@ body {
   z-index: 0;
 }
 
-/* line 139, ../.sass/00-main.scss */
+/* line 147, ../.sass/00-main.scss */
 .track-vote {
   position: absolute;
   top: 0;
@@ -149,21 +155,21 @@ body {
   height: 100px;
   text-align: center;
 }
-/* line 146, ../.sass/00-main.scss */
+/* line 154, ../.sass/00-main.scss */
 .track-vote a {
   font-size: 4em;
   vertical-align: middle;
 }
-/* line 149, ../.sass/00-main.scss */
+/* line 157, ../.sass/00-main.scss */
 .track-vote a:hover {
   text-decoration: none;
 }
-/* line 154, ../.sass/00-main.scss */
+/* line 162, ../.sass/00-main.scss */
 .track-vote .track-vote-count {
   font-size: 2em;
 }
 
-/* line 160, ../.sass/00-main.scss */
+/* line 168, ../.sass/00-main.scss */
 div.chat-box {
   position: fixed;
   top: 70px;
@@ -177,23 +183,23 @@ div.chat-box {
   -o-transition: right 0.5s;
   transition: right 0.5s;
 }
-/* line 170, ../.sass/00-main.scss */
+/* line 178, ../.sass/00-main.scss */
 div.chat-box.minimized {
   right: -460px;
 }
-/* line 173, ../.sass/00-main.scss */
+/* line 181, ../.sass/00-main.scss */
 div.chat-box.minimized:hover {
   right: -420px;
 }
-/* line 178, ../.sass/00-main.scss */
+/* line 186, ../.sass/00-main.scss */
 div.chat-box.maximized {
   right: 0;
 }
-/* line 181, ../.sass/00-main.scss */
+/* line 189, ../.sass/00-main.scss */
 div.chat-box.maximized .chat-btn {
   display: none;
 }
-/* line 186, ../.sass/00-main.scss */
+/* line 194, ../.sass/00-main.scss */
 div.chat-box .chat-btn {
   position: absolute;
   top: 0;
@@ -202,7 +208,7 @@ div.chat-box .chat-btn {
   font-size: 28px;
   z-index: 1;
 }
-/* line 195, ../.sass/00-main.scss */
+/* line 203, ../.sass/00-main.scss */
 div.chat-box .minimize-btn {
   position: absolute;
   top: 5px;
@@ -211,30 +217,30 @@ div.chat-box .minimize-btn {
   text-decoration: none;
   z-index: 1;
 }
-/* line 204, ../.sass/00-main.scss */
+/* line 212, ../.sass/00-main.scss */
 div.chat-box .chat {
   height: 450px;
   margin: 0;
   overflow-y: scroll;
 }
-/* line 210, ../.sass/00-main.scss */
+/* line 218, ../.sass/00-main.scss */
 div.chat-box form {
   height: 40px;
   text-align: center;
 }
-/* line 213, ../.sass/00-main.scss */
+/* line 221, ../.sass/00-main.scss */
 div.chat-box form input {
   width: 420px;
 }
 
-/* line 219, ../.sass/00-main.scss */
+/* line 227, ../.sass/00-main.scss */
 .chat-message {
   position: relative;
   min-height: 50px;
   padding-left: 60px;
   margin-bottom: 10px;
 }
-/* line 224, ../.sass/00-main.scss */
+/* line 232, ../.sass/00-main.scss */
 .chat-message .user-avatar {
   position: absolute;
   top: 0;
@@ -242,21 +248,21 @@ div.chat-box form input {
   width: 50px;
   height: 50px;
 }
-/* line 232, ../.sass/00-main.scss */
+/* line 240, ../.sass/00-main.scss */
 .chat-message .message-contents .small-date {
   font-size: 0.7em;
   line-height: 1em;
 }
-/* line 236, ../.sass/00-main.scss */
+/* line 244, ../.sass/00-main.scss */
 .chat-message .message-contents p {
   margin: 0;
 }
 
-/* line 242, ../.sass/00-main.scss */
+/* line 250, ../.sass/00-main.scss */
 footer {
   margin-top: 40px;
 }
-/* line 244, ../.sass/00-main.scss */
+/* line 252, ../.sass/00-main.scss */
 footer .well {
   display: inline-block;
 }

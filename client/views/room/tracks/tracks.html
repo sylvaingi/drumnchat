@@ -11,7 +11,7 @@
 </template>
 
 <template name="track">
-    <li class="track {{#if playing}}track-playing{{/if}}">  
+    <li class="track track-{{type}} {{#if playing}}track-playing{{/if}}">  
         <img class="track-artwork" src="{{artwork}}" alt="{{title}}">
         <div class="track-info">
             <div class="waveform"></div>

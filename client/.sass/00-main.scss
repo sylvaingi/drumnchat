@@ -90,6 +90,13 @@ $track-height: 100px;
             display: block;
         }
     }
+
+    &.track-yt{
+        .track-artwork{
+            top: 12px;
+            height: auto;
+        }
+    }
 }
 
 .track-artwork{
@@ -110,6 +117,7 @@ $track-height: 100px;
         position: relative;
         display: inline-block;
         width: 100%;
+        padding: 0;
         @include text-ellipsis;
         text-transform: none;
         vertical-align: middle;
