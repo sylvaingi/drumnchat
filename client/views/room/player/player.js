@@ -6,7 +6,6 @@
             Player.playingHandle = DNC.Tracks.find({playing: true}).observe({
                 added: function(track){
                     playTrack(track);
-                    Session.set("player.playing", track);
                 }
             });
         },
@@ -25,9 +24,12 @@
                 Player.ytplayer.pauseVideo();
             }
 
-            Player.onLoading = null;
-            Player.onPlaying = null;
-            Session.set("player.playing", null);
+            //Unregister callback only if the player was in playback mode,
+            //otherwise we could unregister useful callbacks
+            if(Player.playing){
+                Player.onLoading = null;
+                Player.onPlaying = null;
+            }
         }
     };
 
