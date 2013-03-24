@@ -2,12 +2,8 @@
 
     Meteor.subscribe("userData");
 
-    //Use a duplicated non-reactive var for the router function
-    var roomsLoading = true;
     Session.set('rooms.loading', true);
-
     Meteor.subscribe("rooms", function(){
-        roomsLoading = false;
         Session.set('rooms.loading', false);
     });
 
@@ -40,10 +36,6 @@
         
         "/room/:id": function(roomId){
             console.log("Joining room "+roomId);
-
-            if(!roomsLoading && !DNC.Rooms.findOne(roomId)){
-                Meteor.Router.to('/404');
-            }
 
             if(DNC.p_handle){
                 DNC.p_handle.stop();

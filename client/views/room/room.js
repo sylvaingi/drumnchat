@@ -1,6 +1,13 @@
 Template.room.helpers({
     room: function(){
-        return DNC.Rooms.findOne(Session.get("roomId"));
+        var room = DNC.Rooms.findOne(Session.get("roomId"));
+
+        if(!room && !Session.get("rooms.loading")){
+            console.log("Unknown room, redirecting to home");
+            Meteor.Router.to("/");
+        }
+
+        return room;
     },
 
     userCount: function(){
