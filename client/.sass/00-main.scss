@@ -99,6 +99,8 @@ $track-height: 100px;
     border-color: #f09609;
 
     &.track-playing {
+        border-color:#5bb75b;
+
         .track-vote-count{
             line-height: $track-height;
         }
