@@ -49,6 +49,7 @@
         Tracks.insert({
             type: serviceType,
             votes: [userId],
+            votesCount: 1,
             playing: false,
             addedOn: new Date(),
             serviceData: serviceData,
@@ -110,6 +111,7 @@
 
         var setAttrs = {
             votes: [],
+            votesCount: 0,
             addedOn: new Date(),
             playing: false
         };
