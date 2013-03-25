@@ -1,7 +1,18 @@
 <template name="room">
-    <div class="room-header">
-        <h1>{{room.name}} {{#isolate}}<small>{{userCount}} user(s)</small>{{/isolate}}</h1>
-    </div>
+    {{#isolate}}
+        <div class="room-header">
+            <h1>{{room.name}} <small>{{userCount}} user(s)</small></h1>
+            <div class="room-mute">
+                <a href="#" class="room-mute-btn">
+                    {{#if muted}}
+                        <i class="icon-volume-off"></i>
+                    {{else}}
+                        <i class="icon-volume-up"></i>
+                    {{/if}}
+                </a>
+            </div>
+        </div>
+    {{/isolate}}
     {{> tracklist}}
     {{> chat}}
 </template>

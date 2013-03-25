@@ -50,7 +50,7 @@
             DNC.Player.stop();
 
             Session.set("roomId", roomId);        
-            
+
             Session.set("playlist.loading", true);        
             DNC.p_handle = Meteor.subscribe("playlist", roomId, function(){
                 Session.set("playlist.loading", false);        

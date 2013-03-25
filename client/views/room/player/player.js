@@ -8,34 +8,35 @@
                     playTrack(track);
                 }
             });
+
+            Player.muted = false;
+            Session.set("player.muted", Player.muted);
         },
 
         toggleMute: function(){
-            Player.muted = !!!Player.muted;
+            if(Player.track){
+                if(Player.track.type === "sc"){
+                    Player.stream.toggleMute();
+                }
+                else if(Player.track.type === "yt"){
+                    Player.ytplayer[Player.muted? "unMute": "mute"]();
+                }
+            }
+
+            Player.muted = !Player.muted;
             Session.set("player.muted", Player.muted);
-            Player.stream.toggleMute();
         },
 
         stop : function(){
-            if(Player.stream){
-                Player.stream.destruct();
-            }
-            if(Player.ytplayer){
-                Player.ytplayer.pauseVideo();
-            }
-
-            //Unregister callback only if the player was in playback mode,
-            //otherwise we could unregister useful callbacks
-            if(Player.playing){
-                Player.onLoading = null;
-                Player.onPlaying = null;
-            }
+            Player.muted = false;
+            Session.set("player.muted", Player.muted);
+            stopPlayback();
         }
     };
 
     function playTrack(track){
-        DNC.Player.stop();
-
+        stopPlayback();
+        
         Meteor.call("onAirOffset", Session.get("roomId"), function(error,result){
             console.log("Playing track offset is "+ result);
             track._offset = result;
@@ -50,6 +51,8 @@
         else if(track.type === "yt"){
             loadYoutubeTrack(track);
         }
+
+        Player.track = track;
     }
 
     function loadSoundcloudTrack(track){
@@ -90,12 +93,33 @@
 
     function loadYoutubeTrack(track){
         Player.ytplayer.cueVideoById(track.serviceData.id, 0, "large");
+        setYoutubeMute();
+    }
+
+    function setYoutubeMute(){
+        Player.ytplayer[!Player.muted? "unMute": "mute"]();
     }
 
     function startPlayback(track){
         if(track.type === "yt"){
             Player.ytplayer.seekTo(track._offset / 1000);
             Player.ytplayer.playVideo();
+        }
+    }
+
+    function stopPlayback(){
+        if(Player.stream){
+            Player.stream.destruct();
+        }
+        if(Player.ytplayer){
+            Player.ytplayer.pauseVideo();
+        }
+
+        //Unregister callback only if the player was in playback mode,
+        //otherwise we could unregister useful callbacks
+        if(Player.playing){
+            Player.onLoading = null;
+            Player.onPlaying = null;
         }
     }
 

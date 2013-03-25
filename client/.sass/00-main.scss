@@ -67,13 +67,25 @@ body {
     text-align: center;
 }
 
-.room-form{
-    margin-top: 40px;
-}
-
 .room-header {
     position: relative;
     margin-bottom: 20px;
+}
+
+.room-mute{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    font-size: 56px;
+    a {
+        display: inline-block;
+        width: 100%;
+        text-decoration: none;
+        &:hover {
+            text-decoration: none;
+        }
+    }
 }
 
 $track-height: 100px;
