@@ -14,6 +14,9 @@
 input {
     @include box-sizing(content-box);
 }
+.input-append .btn{
+    height: 35px !important;
+}
 
 body {
     position: relative;
@@ -29,6 +32,15 @@ body {
     position: absolute;
     top:0;
     left: -999px;
+}
+
+.trackform {
+    padding-top: 10px;
+    margin: 0 0 0 15px;
+
+    input{
+        width: 350px;
+    }
 }
 
 .social-item:hover [class^="icon-"]{
@@ -62,13 +74,6 @@ body {
 .room-header {
     position: relative;
     margin-bottom: 20px;
-
-    form {
-        position: absolute;
-        bottom: 15px;
-        right: 0;
-        margin: 0;
-    }
 }
 
 $track-height: 100px;

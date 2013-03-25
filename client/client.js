@@ -32,7 +32,12 @@
     };
 
     Meteor.Router.add({
-        "/": "roompicker",
+        "/": function(){
+            Session.set("roomId", null);        
+
+            return "roompicker";
+        },
+            
         
         "/room/:id": function(roomId){
             console.log("Joining room "+roomId);
