@@ -1,14 +1,10 @@
 <template name="roompicker">
-    {{#if roomsLoading}}
-        {{> loader}}
-    {{else}}
-        <ul class="thumbnails roompicker">
-            {{#each rooms}}
-                {{> roomTile}}
-            {{/each}}
-            {{> roomTileAdd}} 
-        </ul>
-    {{/if}}
+    <ul class="thumbnails roompicker">
+        {{#each rooms}}
+            {{> roomTile}}
+        {{/each}}
+        {{> roomTileAdd}} 
+    </ul>
 </template>
 
 <template name="roomTile">

@@ -1,27 +1,55 @@
-Template.room.helpers({
-    room: function(){
-        var room = DNC.Rooms.findOne(Session.get("roomId"));
+(function(){
+    "use strict";
 
-        if(!room && Session.equals("rooms.loading", false)){
+    DNC.joinRoom = function(roomId){
+        if(!DNC.Rooms.findOne({_id: roomId})){
             console.log("Unknown room, redirecting to home");
             Meteor.Router.to("/");
+            return;
+        }
+        
+        if(DNC.p_handle){
+            DNC.p_handle.stop();
+            DNC.c_handle.stop();            
         }
 
-        return room;
-    },
+        DNC.Player.stop();
 
-    userCount: function(){
-        return Meteor.users.find({roomId: Session.get("roomId")}).count();
-    },
+        Session.set("playlist.loading", true);
+        DNC.p_handle = Meteor.subscribe("playlist", roomId, function(){
+            Session.set("playlist.loading", false);
+        });
 
-    muted: function(){
-        return Session.get("player.muted");
-    }
-});
+        DNC.c_handle = Meteor.subscribe("chat", roomId);
+    };
 
-Template.room.events({
-    "click .room-mute-btn": function(event){
-        event.preventDefault();
-        DNC.Player.toggleMute();
-    }
-});
+    Deps.autorun(function(){
+        var roomId = Session.get("roomId");
+
+        if(roomId){
+            DNC.joinRoom(roomId);
+        }
+    });
+
+    Template.room.helpers({
+        room: function(){
+            var room = DNC.Rooms.findOne(Session.get("roomId"));
+            return room;
+        },
+
+        userCount: function(){
+            return Meteor.users.find({roomId: Session.get("roomId")}).count();
+        },
+
+        muted: function(){
+            return Session.get("player.muted");
+        }
+    });
+
+    Template.room.events({
+        "click .room-mute-btn": function(event){
+            event.preventDefault();
+            DNC.Player.toggleMute();
+        }
+    });
+}) ();

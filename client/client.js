@@ -1,11 +1,7 @@
 (function(){
 
     Meteor.subscribe("userData");
-
-    Session.set('rooms.loading', true);
-    Meteor.subscribe("rooms", function(){
-        Session.set('rooms.loading', false);
-    });
+    DNC.r_handle = Meteor.subscribe("rooms");
 
     DNC.login = function(service){
         switch(service){
@@ -33,30 +29,23 @@
 
     Meteor.Router.add({
         "/": function(){
-            Session.set("roomId", null);        
+            if(!DNC.r_handle.ready()){
+                return "loader";
+            }
 
+            Session.set("roomId", null);        
             return "roompicker";
         },
             
         
         "/room/:id": function(roomId){
-            console.log("Joining room "+roomId);
-
-            if(DNC.p_handle){
-                DNC.p_handle.stop();
-                DNC.c_handle.stop();            
+            if(!DNC.r_handle.ready()){
+                return "loader";
             }
 
-            DNC.Player.stop();
-
-            Session.set("roomId", roomId);        
-
-            Session.set("playlist.loading", true);        
-            DNC.p_handle = Meteor.subscribe("playlist", roomId, function(){
-                Session.set("playlist.loading", false);        
-            });
+            console.log("Joining room "+roomId);
             
-            DNC.c_handle = Meteor.subscribe("chat", roomId);
+            Session.set("roomId", roomId);
 
             return "room";
         }
