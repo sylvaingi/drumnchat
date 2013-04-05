@@ -6,25 +6,25 @@
   },
   "dependencies": {
     "basePackages": {
-      "accounts-soundcloud": {
-        "git": "https://github.com/sylvaingi/meteor-accounts-soundcloud.git",
-        "branch": "master"
-      },
-      "router": {
-        "git": "https://github.com/sylvaingi/meteor-router.git",
-        "branch": "master"
-      }
+      "accounts-soundcloud": {},
+      "router": {},
+      "HTML5-History-API": {}
     },
     "packages": {
       "accounts-soundcloud": {
         "git": "https://github.com/sylvaingi/meteor-accounts-soundcloud.git",
-        "branch": "master",
-        "commit": "7a9b17fad67e3a25d79fc907a41543c3d3aee625"
+        "tag": "v0.1.0",
+        "commit": "74c726fa5376a4e0715bb6aefda7f659dd3830a3"
       },
       "router": {
-        "git": "https://github.com/sylvaingi/meteor-router.git",
-        "branch": "master",
-        "commit": "5e4be6ede55fbf2e0b1014dedc720093bd367ea9"
+        "git": "https://github.com/tmeasday/meteor-router.git",
+        "tag": "v0.4.4",
+        "commit": "1cc6f24579cf9f3cfe0a42f1bd3e42cdc2491a5f"
+      },
+      "HTML5-History-API": {
+        "git": "https://github.com/tmeasday/meteor-HTML5-History-API.git",
+        "tag": "v0.1.2",
+        "commit": "72333bfa71ae1ca75243085e83200eef40818088"
       },
       "page-js-ie-support": {
         "git": "https://github.com/tmeasday/meteor-page-js-ie-support.git",

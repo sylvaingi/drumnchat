@@ -3,8 +3,6 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-preserve-inputs
-less
 http
 accounts-base
 accounts-oauth2-helper
@@ -12,4 +10,5 @@ accounts-soundcloud
 accounts-ui
 accounts-facebook
 accounts-google
+HTML5-History-API
 router
