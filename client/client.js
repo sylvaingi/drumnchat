@@ -33,18 +33,16 @@
                 return "loader";
             }
 
-            Session.set("roomId", null);        
+            Session.set("roomId", null);
             return "roompicker";
         },
-            
-        
+
+
         "/room/:id": function(roomId){
             if(!DNC.r_handle.ready()){
                 return "loader";
             }
 
-            console.log("Joining room "+roomId);
-            
             Session.set("roomId", roomId);
 
             return "room";
