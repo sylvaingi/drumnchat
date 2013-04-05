@@ -146,6 +146,8 @@
           events: {
             "onReady": function(){
                 Player.ytplayer = ytplayer;
+                Player.ytplayer.setVolume(100);
+
                 Session.set("youtube.ready", true);
             },
             "onError": function(error){
