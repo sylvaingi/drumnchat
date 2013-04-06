@@ -1,3 +1,5 @@
+"use strict";
+
 Meteor.startup(function(){
     /*DNC.Tracks.remove({});
     Meteor.call("addTrack", "https://soundcloud.com/annie-mac-presents/free-music-monday-starkey-the?in=enum1on/sets/trap");

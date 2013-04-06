@@ -1,6 +1,6 @@
 {
   "meteor": {
-    "tag": "v0.5.9"
+    "branch": "master"
   },
   "packages": {
     "accounts-soundcloud": {

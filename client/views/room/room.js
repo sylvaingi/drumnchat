@@ -1,57 +1,55 @@
-(function(){
-    "use strict";
+"use strict";
 
-    DNC.joinRoom = function(roomId){
-        console.log("Joining room "+roomId);
+DNC.joinRoom = function(roomId){
+    console.log("Joining room "+roomId);
 
-        if(!DNC.Rooms.findOne({_id: roomId})){
-            console.log("Unknown room, redirecting to home");
-            Meteor.Router.to("/");
-            return;
-        }
+    if(!DNC.Rooms.findOne({_id: roomId})){
+        console.log("Unknown room, redirecting to home");
+        Meteor.Router.to("/");
+        return;
+    }
 
-        if(DNC.p_handle){
-            DNC.p_handle.stop();
-            DNC.c_handle.stop();
-        }
+    if(DNC.p_handle){
+        DNC.p_handle.stop();
+        DNC.c_handle.stop();
+    }
 
-        DNC.Player.stop();
+    DNC.Player.stop();
 
-        Session.set("playlist.loading", true);
-        DNC.p_handle = Meteor.subscribe("playlist", roomId, function(){
-            Session.set("playlist.loading", false);
-        });
-
-        DNC.c_handle = Meteor.subscribe("chat", roomId);
-    };
-
-    Deps.autorun(function(){
-        var roomId = Session.get("roomId");
-
-        if(roomId){
-            DNC.joinRoom(roomId);
-        }
+    Session.set("playlist.loading", true);
+    DNC.p_handle = Meteor.subscribe("playlist", roomId, function(){
+        Session.set("playlist.loading", false);
     });
 
-    Template.room.helpers({
-        room: function(){
-            var room = DNC.Rooms.findOne(Session.get("roomId"));
-            return room;
-        },
+    DNC.c_handle = Meteor.subscribe("chat", roomId);
+};
 
-        userCount: function(){
-            return Meteor.users.find({roomId: Session.get("roomId")}).count();
-        },
+Deps.autorun(function(){
+    var roomId = Session.get("roomId");
 
-        muted: function(){
-            return Session.get("player.muted");
-        }
-    });
+    if(roomId){
+        DNC.joinRoom(roomId);
+    }
+});
 
-    Template.room.events({
-        "click .room-mute-btn": function(event){
-            event.preventDefault();
-            DNC.Player.toggleMute();
-        }
-    });
-}) ();
+Template.room.helpers({
+    room: function(){
+        var room = DNC.Rooms.findOne(Session.get("roomId"));
+        return room;
+    },
+
+    userCount: function(){
+        return Meteor.users.find({roomId: Session.get("roomId")}).count();
+    },
+
+    muted: function(){
+        return Session.get("player.muted");
+    }
+});
+
+Template.room.events({
+    "click .room-mute-btn": function(event){
+        event.preventDefault();
+        DNC.Player.toggleMute();
+    }
+});

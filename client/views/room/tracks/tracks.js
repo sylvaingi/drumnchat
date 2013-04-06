@@ -1,3 +1,5 @@
+"use strict";
+
 Template.tracklist.tracks = function () {
     return DNC.Tracks.playlist(Session.get("roomId"));
 };

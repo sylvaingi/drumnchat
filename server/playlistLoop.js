@@ -1,32 +1,31 @@
-(function(){
-    "use strict";
-    var tickInterval = 1000;
+"use strict";
 
-    function tick(){
-        DNC.Rooms.find().forEach(function(room){
-            var roomId = room._id;
-            if(DNC.Tracks.playlist(roomId).count() === 0){
-                return;
-            }
+var tickInterval = 1000;
 
-            var track = DNC.Tracks.playingTrack(roomId);
+function tick(){
+    DNC.Rooms.find().forEach(function(room){
+        var roomId = room._id;
+        if(DNC.Tracks.playlist(roomId).count() === 0){
+            return;
+        }
 
-            //Load next track
-            if(!track || track.offset > track.serviceData.duration){
-                DNC.Tracks.nextTrack(roomId);
-            }
-            else {
-                DNC.Tracks.update(track._id, {$set: {offset: track.offset + tickInterval}});
-            }
+        var track = DNC.Tracks.playingTrack(roomId);
 
-        });
+        //Load next track
+        if(!track || track.offset > track.serviceData.duration){
+            DNC.Tracks.nextTrack(roomId);
+        }
+        else {
+            DNC.Tracks.update(track._id, {$set: {offset: track.offset + tickInterval}});
+        }
 
-        nextTick();
-    }
+    });
 
-    function nextTick(){
-        Meteor.setTimeout(tick, tickInterval);
-    }
+    nextTick();
+}
 
-    DNC.tick = tick;
-}());
+function nextTick(){
+    Meteor.setTimeout(tick, tickInterval);
+}
+
+DNC.tick = tick;

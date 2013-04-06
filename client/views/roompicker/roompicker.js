@@ -1,3 +1,5 @@
+"use strict";
+
 Template.roompicker.helpers({
     rooms: DNC.Rooms.find({})
 });
