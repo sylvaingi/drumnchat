@@ -125,7 +125,7 @@ Tracks._getYoutubeTrackData = function(trackUrlObj){
     }
 
     var entry = result.data.entry;
-    var url = _.findWhere(entry.link, {rel: "alternate"}).href;
+    var url = _.find(entry.link, {rel: "alternate"}).href;
 
     var yt = {
         id: videoId,
