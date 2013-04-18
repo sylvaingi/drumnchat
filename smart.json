@@ -3,10 +3,7 @@
     "branch": "master"
   },
   "packages": {
-    "accounts-soundcloud": {
-    },
-    "router": {
-    },
-    "HTML5-History-API": {}
+    "accounts-soundcloud": {},
+    "router": {}
   }
 }

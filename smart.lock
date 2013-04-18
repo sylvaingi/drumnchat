@@ -2,13 +2,12 @@
   "meteor": {
     "git": "https://github.com/meteor/meteor.git",
     "branch": "master",
-    "commit": "cab491f3650fffc85661bca6b3cecf583410e05d"
+    "commit": "1dfc7171f237a029cca74cbf25024acbf6ed5b75"
   },
   "dependencies": {
     "basePackages": {
       "accounts-soundcloud": {},
-      "router": {},
-      "HTML5-History-API": {}
+      "router": {}
     },
     "packages": {
       "accounts-soundcloud": {
@@ -18,13 +17,8 @@
       },
       "router": {
         "git": "https://github.com/tmeasday/meteor-router.git",
-        "tag": "v0.5.0",
-        "commit": "b1ee74c816d1fc63b713139158075feb8a0c6d26"
-      },
-      "HTML5-History-API": {
-        "git": "https://github.com/tmeasday/meteor-HTML5-History-API.git",
-        "tag": "v0.1.2",
-        "commit": "72333bfa71ae1ca75243085e83200eef40818088"
+        "tag": "v0.5.1",
+        "commit": "32e377c7703bb119acccc859fc7296882903cbe7"
       },
       "page-js-ie-support": {
         "git": "https://github.com/tmeasday/meteor-page-js-ie-support.git",
