@@ -7,7 +7,7 @@
     text-overflow: ellipsis;
 }
 
-* { 
+* {
     @include box-sizing(border-box);
 }
 
@@ -94,7 +94,7 @@ $track-height: 100px;
     position: relative;
     height: $track-height;
     margin-bottom: 10px;
-    padding: 0 $track-height; 
+    padding: 0 $track-height;
     border-right: 3px solid;
     border-color: #f09609;
 
@@ -141,7 +141,7 @@ $track-height: 100px;
         text-transform: none;
         vertical-align: middle;
         z-index: 1;
-    
+
         a {
             color: inherit;
             &:hover {
@@ -238,7 +238,7 @@ div.chat-box {
         height: 40px;
         text-align: center;
         input {
-            width: 420px;
+            width: 400px;
         }
     }
 }

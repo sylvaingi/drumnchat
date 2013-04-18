@@ -4,5 +4,6 @@ Meteor.i18n.fr = {
     "loading": "Patiente...",
     "room-add": "Ajouter",
     "user-s": "utilisateur(s)",
-    "track-form-hint": "Ajoutez une adresse SoundCloud or YouTube ici"
+    "track-form-hint": "Ajoutez une adresse SoundCloud or YouTube ici",
+    "chat-send": "Envoyer"
 };

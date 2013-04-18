@@ -4,5 +4,6 @@ Meteor.i18n.en = {
     "loading": "Loading...",
     "room-add": "Add",
     "user-s": "user(s)",
-    "track-form-hint": "Add a SoundCloud or YouTube address here"
+    "track-form-hint": "Add a SoundCloud or YouTube address here",
+    "chat-send": "Send"
 };
