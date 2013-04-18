@@ -4,14 +4,14 @@
             <div class="container">
                 <div class="pull-left">
                     <a href="/" class="brand">DrumNChat α</a>
-                    {{#if currentRoom}}           
+                    {{#if currentRoom}}
                         {{> trackform}}
                     {{/if}}
-                </div>     
+                </div>
                 {{> headerUser}}
             </div>
         </div>
-    </div> 
+    </div>
 </template>
 
 <template name="headerUser">
@@ -21,12 +21,12 @@
             <a href="#">
                 {{userAvatar currentUser}} {{currentUser.profile.name}}
             </a>
-        </li> 
-        <li><a href="#" class="disconnect"><i class="icon-off"></i> Disconnect</a></li>
+        </li>
+        <li><a href="#" class="disconnect"><i class="icon-off"></i> {{__ "logout"}}</a></li>
         {{else}}
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="icon-off"></i> Connect <b class="caret"></b>
+                <i class="icon-off"></i> {{__ "login"}} <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
                 <li><a href="#" class="social-item" data-service="facebook"><i class="icon-facebook-sign"></i> Facebook</a></li>

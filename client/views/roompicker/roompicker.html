@@ -3,7 +3,7 @@
         {{#each rooms}}
             {{> roomTile}}
         {{/each}}
-        {{> roomTileAdd}} 
+        {{> roomTileAdd}}
     </ul>
 </template>
 
@@ -15,7 +15,7 @@
 
 <template name="roomTileAdd">
     <li class="span3 tile tile-double tile-green tile-add">
-        <a href="#"><h2 class="tile-text"><i class="icon-plus-sign-alt"></i>Add</h2></a>
+        <a href="#"><h2 class="tile-text"><i class="icon-plus-sign-alt"></i>{{__ "room-add"}}</h2></a>
     </li>
 </template>
 

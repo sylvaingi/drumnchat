@@ -1,7 +1,7 @@
 <template name="room">
     {{#isolate}}
         <div class="room-header">
-            <h1>{{room.name}} <small>{{userCount}} user(s)</small></h1>
+            <h1>{{room.name}} <small>{{userCount}} {{__ "user-s"}}</small></h1>
             <div class="room-mute">
                 <a href="#" class="room-mute-btn">
                     {{#if muted}}
