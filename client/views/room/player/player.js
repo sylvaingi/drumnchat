@@ -37,7 +37,7 @@ function playTrack(track){
     stopPlayback();
 
     Meteor.call("onAirOffset", Session.get("roomId"), function(error,result){
-        console.log("Playing track offset is "+ result);
+        console.log("Playing track offset is "+ result + "ms");
         track._offset = result;
 
         startPlayback(track);
@@ -80,7 +80,7 @@ function deferPlayAtRequiredOffset(track){
     if(!track._playing && track._offset!== null){
         var latencyComp = Date.now() - track._loadstart;
         if(this.duration > track._offset + latencyComp){
-            console.log("Playing track caught up with offset at " + this.duration + " (comp "+latencyComp+")");
+            console.log("Playing track caught up at " + (track._offset + latencyComp) + "ms (comp "+latencyComp+"ms)");
 
             track._playing = true;
 

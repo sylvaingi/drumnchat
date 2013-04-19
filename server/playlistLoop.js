@@ -1,6 +1,7 @@
 "use strict";
 
 var tickInterval = 1000;
+var lastInterval = Date.now();
 
 function tick(){
     DNC.Rooms.find().forEach(function(room){
@@ -16,11 +17,13 @@ function tick(){
             DNC.Tracks.nextTrack(roomId);
         }
         else {
-            DNC.Tracks.update(track._id, {$set: {offset: track.offset + tickInterval}});
+            var now = Date.now();
+            DNC.Tracks.update(track._id, {$set: {offset: track.offset + now - lastInterval}});
         }
 
     });
 
+    lastInterval = Date.now();
     nextTick();
 }
 
