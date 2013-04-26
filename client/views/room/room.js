@@ -38,8 +38,8 @@ Template.room.helpers({
         return room;
     },
 
-    userCount: function(){
-        return Meteor.users.find({roomId: Session.get("roomId")}).count();
+    users: function(){
+        return Meteor.users.find({roomId: Session.get("roomId")});
     },
 
     muted: function(){

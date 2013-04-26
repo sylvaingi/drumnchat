@@ -1,12 +1,14 @@
 {
     "globals": {
       "jQuery": true,
-      
+
       "Meteor": true,
       "Template": true,
       "Session": true,
       "Accounts": true,
       "Handlebars": true,
+      "Deps": true,
+
       "_": true,
       "moment": true,
 

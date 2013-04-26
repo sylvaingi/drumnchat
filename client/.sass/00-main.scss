@@ -7,6 +7,14 @@
     text-overflow: ellipsis;
 }
 
+@mixin clearfix {
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
 * {
     @include box-sizing(border-box);
 }
@@ -70,14 +78,26 @@ body {
 .room-header {
     position: relative;
     margin-bottom: 20px;
+
+    @include clearfix;
+
+    h1 {
+        float: left;
+        margin: 0;
+    }
+}
+
+.room-users {
+    float: left;
+    width: 300px;
+    margin-left: 20px;
 }
 
 .room-mute{
-    position: absolute;
-    top: 0;
-    right: 0;
     width: 60px;
+    float:right;
     font-size: 56px;
+
     a {
         display: inline-block;
         width: 100%;
