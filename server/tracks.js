@@ -36,7 +36,7 @@ Tracks.nextTrack = function(roomId){
     } while(nextTrack === null && candidateTrack !== null);
 
     if(nextTrack){
-        Tracks.update(nextTrack._id, {$set: {playing: true, offset:0}});
+        Tracks.update(nextTrack._id, {$set: {playing: true, offset:0, lastUpdate: Date.now()}});
     }
 };
 
@@ -154,5 +154,5 @@ Tracks.stopTrack = function(roomId){
         addedOn: new Date(),
         playing: false
     };
-    Tracks.update(track._id, {$set: setAttrs, $unset:{offset: ""}});
+    Tracks.update(track._id, {$set: setAttrs, $unset:{offset: "", lastUpdate: ""}});
 };
