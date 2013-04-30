@@ -3,16 +3,20 @@
 Meteor.subscribe("userData");
 DNC.r_handle = Meteor.subscribe("rooms");
 
+function loginCb(){
+    Meteor.call("heartbeat");
+}
+
 DNC.login = function(service){
     switch(service){
         case "soundcloud":
-            Meteor.loginWithSoundcloud({});
+            Meteor.loginWithSoundcloud({}, loginCb);
             break;
         case "facebook":
-            Meteor.loginWithFacebook({});
+            Meteor.loginWithFacebook({}, loginCb);
             break;
         case "google":
-            Meteor.loginWithGoogle({});
+            Meteor.loginWithGoogle({}, loginCb);
             break;
         default:
             alert("C'mon dude....");
