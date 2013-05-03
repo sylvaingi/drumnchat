@@ -51,9 +51,8 @@ function playTrack(track){
         loadYoutubeTrack(track);
     }
 
-    DNC.Notifications.show(track);
-
     Player.track = track;
+    Session.set("player.track", track);
 }
 
 function loadSoundcloudTrack(track){
@@ -123,7 +122,8 @@ function stopPlayback(){
         Player.onPlaying = null;
     }
 
-    DNC.Notifications.close();
+    Player.track = null;
+    Session.set("player.track", null);
 }
 
 //Load 3rd party players

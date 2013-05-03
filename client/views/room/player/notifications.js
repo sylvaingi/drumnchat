@@ -32,6 +32,7 @@ Notifications.close = function(){
     if(showing){
         clearTimeout(current.to);
         current.notif.close();
+        current.notif = null;
         showing = false;
     }
 };
@@ -50,3 +51,14 @@ if(window.webkitNotifications){
         });
     }
 }
+
+Deps.autorun(function(){
+    var track = Session.get("player.track");
+
+    if(track){
+        Notifications.show(track);
+    }
+    else {
+        Notifications.close();
+    }
+});
