@@ -51,19 +51,7 @@ function playTrack(track){
         loadYoutubeTrack(track);
     }
 
-    if(DNC.notifications){
-        var notification = window.webkitNotifications.createNotification(
-            track.serviceData.artwork_url,
-            Meteor.i18n.stringFor("now-playing"),
-            track.serviceData.title
-        );
-
-        notification.show();
-
-        setTimeout(function(){
-            notification.close();
-        }, 10000);
-    }
+    DNC.Notifications.show(track);
 
     Player.track = track;
 }
@@ -134,6 +122,8 @@ function stopPlayback(){
         Player.onLoading = null;
         Player.onPlaying = null;
     }
+
+    DNC.Notifications.close();
 }
 
 //Load 3rd party players
