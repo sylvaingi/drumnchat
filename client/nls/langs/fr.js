@@ -5,5 +5,6 @@ Meteor.i18n.fr = {
     "room-add": "Ajouter",
     "user-s": "utilisateur(s)",
     "track-form-hint": "Ajoutez une adresse SoundCloud or YouTube ici",
-    "chat-send": "Envoyer"
+    "chat-send": "Envoyer",
+    "now-playing": "A l'écoute"
 };

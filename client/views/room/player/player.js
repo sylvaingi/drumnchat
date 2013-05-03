@@ -51,6 +51,20 @@ function playTrack(track){
         loadYoutubeTrack(track);
     }
 
+    if(DNC.notifications){
+        var notification = window.webkitNotifications.createNotification(
+            track.serviceData.artwork_url,
+            Meteor.i18n.stringFor("now-playing"),
+            track.serviceData.title
+        );
+
+        notification.show();
+
+        setTimeout(function(){
+            notification.close();
+        }, 10000);
+    }
+
     Player.track = track;
 }
 

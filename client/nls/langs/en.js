@@ -5,5 +5,6 @@ Meteor.i18n.en = {
     "room-add": "Add",
     "user-s": "user(s)",
     "track-form-hint": "Add a SoundCloud or YouTube address here",
-    "chat-send": "Send"
+    "chat-send": "Send",
+    "now-playing": "Now playing"
 };
