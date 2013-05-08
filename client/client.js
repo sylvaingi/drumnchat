@@ -58,3 +58,7 @@ Meteor.setInterval(function(){
     Session.set("now", moment().valueOf());
     Meteor.call("heartbeat");
 }, 30000);
+
+window.onunload = function() {
+    DNC.Notifications.close();
+};
