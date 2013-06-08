@@ -15,19 +15,18 @@ Tracks.nextTrack = function(roomId){
 
         if(candidateTrack){
             var serviceResult;
+            try {
+                if(candidateTrack.type === "yt"){
+                    serviceResult = Tracks._getYoutubeTrack(candidateTrack.serviceData.id);
+                }
+                else if(candidateTrack.type === "sc"){
+                    serviceResult = Tracks._getSoundcloudTrack(candidateTrack.serviceData.id);
+                }
 
-            if(candidateTrack.type === "yt"){
-                serviceResult = Tracks._getYoutubeTrack(candidateTrack.serviceData.id);
-            }
-            else if(candidateTrack.type === "sc"){
-                serviceResult = Tracks._getSoundcloudTrack(candidateTrack.serviceData.id);
-            }
-
-            if(serviceResult.statusCode === 200){
                 console.log("Next track in "+candidateTrack.roomId+" is '"+candidateTrack.serviceData.title+"' with "+candidateTrack.votesCount+" votes");
                 nextTrack = candidateTrack;
             }
-            else {
+            catch(e) {
                 console.log("Deleting 404'd track " + candidateTrack.serviceData.title);
                 Tracks.remove({_id: candidateTrack._id});
             }
@@ -51,23 +50,33 @@ Tracks.enqueue = function(trackUrl, userId, roomId){
 
     var serviceData;
     var serviceType;
-    if(_.indexOf(["www.youtube.com", "youtu.be"], parsedUrl.hostname) !== -1){
-        serviceType = "yt";
-        serviceData = Tracks._getYoutubeTrackData(parsedUrl, userId, roomId);
+
+    try {
+        if(_.indexOf(["www.youtube.com", "youtu.be"], parsedUrl.hostname) !== -1){
+            serviceType = "yt";
+            serviceData = Tracks._getYoutubeTrackData(parsedUrl, userId, roomId);
+        }
+        else if(parsedUrl.hostname === "soundcloud.com"){
+            serviceType = "sc";
+            serviceData = Tracks._getSoundcloudTrackData(parsedUrl, userId, roomId);
+        }
+        else {
+            throw new Meteor.Error(400, "Invalid URL");
+        }
+    } catch (e){
+        if (e instanceof Meteor.Error){
+            throw e;
+        }
+
+        throw new Meteor.Error(404, "Unknown track");
     }
-    else if(parsedUrl.hostname === "soundcloud.com"){
-        serviceType = "sc";
-        serviceData = Tracks._getSoundcloudTrackData(parsedUrl, userId, roomId);
-    }
-    else {
-        throw new Error(400, "Invalid URL");
-    }
+
 
     if(roomId !== DNC.Rooms.mixesRoom && serviceData.duration > 10 * 60 * 1000){
         throw new Meteor.Error(400, "Track duration is too long");
     }
 
-    var track = Tracks.findOne({roomId: roomId, type:serviceType, "data.id":serviceData.id});
+    var track = Tracks.findOne({roomId: roomId, type:serviceType, "serviceData.id":serviceData.id});
     if(track){
         console.log("Track '"+serviceData.title+"' is already enqueued, voting instead");
         Tracks.addVote(track._id);
@@ -89,10 +98,6 @@ Tracks._getSoundcloudTrackData = function(trackUrlObj){
     var result = Meteor.http.get("http://api.soundcloud.com/resolve", {
         params : {url:url.format(trackUrlObj), client_id: DNC.SC_clientId, format:'json'}
     });
-
-    if(result.statusCode !== 200){
-        throw new Meteor.Error(result.statusCode, "Unable to resolve SC URL");
-    }
 
     if(!result.data.streamable){
         throw new Meteor.Error(400, "Unable to stream SC track, streaming is disabled");
@@ -119,10 +124,6 @@ Tracks._getYoutubeTrackData = function(trackUrlObj){
     }
 
     var result = Tracks._getYoutubeTrack(videoId);
-    if(result.statusCode !== 200){
-        console.log(result);
-        throw new Meteor.Error(result.statusCode, "Unable to fetch Youtube data");
-    }
 
     var entry = result.data.entry;
     var url = _.find(entry.link, {rel: "alternate"}).href;
