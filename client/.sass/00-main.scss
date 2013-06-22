@@ -26,6 +26,10 @@ input {
     height: 35px !important;
 }
 
+.invisible {
+    opacity: 0;
+}
+
 body {
     position: relative;
     padding-top: 70px;
@@ -120,8 +124,11 @@ $track-height: 100px;
     height: $track-height;
     margin-bottom: 10px;
     padding: 0 $track-height;
+    background-color: #fff;
     border-right: 3px solid;
     border-color: #f09609;
+    @include transition(all 1s 0s);
+    z-index: 0;
 
     &.track-playing {
         border-color:#5bb75b;

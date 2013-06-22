@@ -1,7 +1,11 @@
 "use strict";
 
 Template.tracklist.tracks = function () {
-    return DNC.Tracks.playlist(Session.get("roomId"));
+    var rank = 0;
+    return DNC.Tracks.playlist(Session.get("roomId")).map(function(track) {
+        track._rank = rank++;
+        return track;
+    });
 };
 
 Template.tracklist.tracklistLoading = function () {
@@ -27,16 +31,49 @@ Template.track.events({
 });
 
 Template.track.rendered = function(){
-    if(!this.data.playing || this.data.type === "yt"){
+    if(!this.data.playing) {
+        delete this.waveform;
+    }
+    else {
+        renderSoundcloudWaveform(this);
+    }
+
+    animateTrack(this);
+};
+
+var trackHeight = 100;
+
+function animateTrack (template) {
+  var rank = template.data._rank;
+  var $this = $(template.firstNode);
+  var newPosition = rank * trackHeight;
+
+  if (typeof(template.currentPosition) !== 'undefined') {
+    var previousPosition = template.currentPosition;
+    var delta = previousPosition - newPosition;
+    $this.css("top", delta + "px");
+  }
+  else {
+    $this.addClass("invisible");
+  }
+
+  Meteor.defer(function() {
+    template.currentPosition = newPosition;
+    $this.css("top",  "0px").removeClass("invisible");
+  });
+}
+
+function renderSoundcloudWaveform(template) {
+    if (template.data.type !== "sc" || template.waveform) {
         return;
     }
 
-    var waveformEl = this.find(".waveform");
+    var waveformEl = template.find(".waveform");
 
     var waveform = new Waveform({
         container: waveformEl
     });
-    waveform.dataFromSoundCloudTrack(this.data.serviceData);
+    waveform.dataFromSoundCloudTrack(template.data.serviceData);
 
     var ctx = waveform.context;
     var gradient = ctx.createLinearGradient(0, 0, 0, waveform.height);
@@ -48,4 +85,6 @@ Template.track.rendered = function(){
 
     DNC.Player.onPlaying = opts.whileplaying;
     DNC.Player.onLoading = opts.whileloading;
-};
+
+    template.waveform = waveform;
+}
