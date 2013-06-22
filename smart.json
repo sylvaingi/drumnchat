@@ -1,9 +1,7 @@
 {
-  "meteor": {
-    "branch": "master"
-  },
   "packages": {
     "accounts-soundcloud": {},
+    "soundcloud": {},
     "router": {}
   }
 }

@@ -5,9 +5,8 @@
 
 http
 accounts-base
-accounts-oauth2-helper
-accounts-soundcloud
 accounts-ui
 accounts-facebook
 accounts-google
-router
+accounts-soundcloud
+soundcloud

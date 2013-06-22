@@ -161,7 +161,7 @@ window.onYouTubeIframeAPIReady = function(playerid){
 };
 
 Deps.autorun(function(){
-    if(Session.get("youtube.ready") && Session.get("soundcloud.ready")){
+    if(Session.get("youtube.ready") && Soundcloud.ready()){
         Player.init();
     }
 });
