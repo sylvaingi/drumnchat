@@ -3,7 +3,7 @@
 DNC.joinRoom = function(roomId){
     console.log("Joining room "+roomId);
 
-    if(!DNC.Rooms.findOne({_id: roomId})){
+    if(DNC.r_handle.ready() && !DNC.Rooms.findOne({_id: roomId})){
         console.log("Unknown room, redirecting to home");
         Meteor.Router.to("/");
         return;
@@ -23,14 +23,6 @@ DNC.joinRoom = function(roomId){
 
     DNC.c_handle = Meteor.subscribe("chat", roomId);
 };
-
-Deps.autorun(function(){
-    var roomId = Session.get("roomId");
-
-    if(roomId){
-        DNC.joinRoom(roomId);
-    }
-});
 
 Template.room.helpers({
     room: function(){
@@ -52,4 +44,14 @@ Template.room.events({
         event.preventDefault();
         DNC.Player.toggleMute();
     }
+});
+
+Meteor.startup(function() {
+    Deps.autorun(function(){
+        var roomId = Session.get("roomId");
+
+        if(roomId){
+            DNC.joinRoom(roomId);
+        }
+    });
 });
