@@ -176,7 +176,7 @@
 
     Waveform.prototype.dataFromSoundCloudTrack = function(track) {
       var _this = this;
-      return $.getJSON("http://waveformjs.org/w?callback=?", {
+      return $.getJSON("http://www.waveformjs.org/w?callback=?", {
         url: track.waveform_url
       }, function(data) {
         return _this.update({
