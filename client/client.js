@@ -31,32 +31,28 @@ DNC.logout = function(){
     Meteor.logout();
 };
 
-Meteor.Router.add({
-    "/": {
-        to: "roompicker",
-        and: function(){
-            Session.set("roomId", null);
-        }
-    },
-    "/room/:_id": {
-        to: "room",
-        and: function(id){
-            Session.set("roomId", id);
-        }
-    }
+Router.configure({
+    layout: 'layout',
+    loadingTemplate: 'loader'
 });
 
-Meteor.Router.filters({
-    "loader": function(page){
-        if(!DNC.r_handle.ready()){
-            return "loader";
+Router.map(function() {
+    this.route('roompicker', {
+        path: "/",
+        waitOn: DNC.r_handle,
+        onAfterRun: function (){
+            Session.set("roomId", null);
         }
-        else {
-            return page;
+    });
+
+    this.route('room', {
+        path: "/:_id",
+        data: function() { return DNC.Rooms.findOne(this.params._id); },
+        onAfterRun: function (){
+            Session.set("roomId", this.params._id);
         }
-    }
+    });
 });
-Meteor.Router.filter("loader");
 
 Session.set("now", moment().valueOf());
 Meteor.setInterval(function(){

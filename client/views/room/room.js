@@ -3,12 +3,6 @@
 DNC.joinRoom = function(roomId){
     console.log("Joining room "+roomId);
 
-    if(DNC.r_handle.ready() && !DNC.Rooms.findOne({_id: roomId})){
-        console.log("Unknown room, redirecting to home");
-        Meteor.Router.to("/");
-        return;
-    }
-
     if(DNC.p_handle){
         DNC.p_handle.stop();
         DNC.c_handle.stop();

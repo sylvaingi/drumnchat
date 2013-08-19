@@ -2,6 +2,6 @@
   "packages": {
     "accounts-soundcloud": {},
     "soundcloud": {},
-    "router": {}
+    "iron-router": {}
   }
 }

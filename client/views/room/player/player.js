@@ -167,7 +167,7 @@ Deps.autorun(function(){
 });
 
 Deps.autorun(function(){
-    Meteor.Router.page();
+    Router.current();
     Player.stop();
 });
 

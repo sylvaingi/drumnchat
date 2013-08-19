@@ -3,13 +3,21 @@
     <script type="text/javascript" src="https://www.youtube.com/iframe_api"></script>
 </head>
 
-<body>
-    {{> header}} 
+<body></body>
+
+<template name="layout">
+    {{> header}}
     <div class="container main-container">
-        {{renderPage}}
+        {{yield}}
     </div>
     {{> footer}}
+    {{> ytplayer}}
+</template>
+
+<template name="ytplayer">
     {{#constant}}
-    <div id="yt-player"></div>
+    <div id="yt-player-wrap">
+        <div id="yt-player"></div>
+    </div>
     {{/constant}}
-</body>
+</template>
