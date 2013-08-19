@@ -48,6 +48,7 @@ Router.map(function() {
     this.route('room', {
         path: "/:_id",
         data: function() { return DNC.Rooms.findOne(this.params._id); },
+        notFoundTemplate: "roomNotFound",
         onAfterRun: function (){
             Session.set("roomId", this.params._id);
         }

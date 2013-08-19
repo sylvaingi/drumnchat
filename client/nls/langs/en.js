@@ -7,5 +7,6 @@ Meteor.i18n.en = {
     "track-form-hint": "Add a SoundCloud or YouTube address here",
     "chat-send": "Send",
     "now-playing": "Now playing",
-    "vote": "Vote for this track"
+    "vote": "Vote for this track",
+    "404": "This page does not exists!"
 };

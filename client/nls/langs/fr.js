@@ -7,5 +7,6 @@ Meteor.i18n.fr = {
     "track-form-hint": "Ajoutez une adresse SoundCloud or YouTube ici",
     "chat-send": "Envoyer",
     "now-playing": "A l'écoute",
-    "vote": "Voter pour ce titre"
+    "vote": "Voter pour ce titre",
+    "404": "Cette page n'existe pas!"
 };
