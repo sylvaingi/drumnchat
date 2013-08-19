@@ -10,3 +10,6 @@ accounts-facebook
 accounts-google
 accounts-soundcloud
 soundcloud
+standard-app-packages
+router
+page-js-ie-support
