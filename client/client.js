@@ -47,6 +47,7 @@ Router.map(function() {
 
     this.route('room', {
         path: "/:_id",
+        waitOn: DNC.r_handle,
         data: function() { return DNC.Rooms.findOne(this.params._id); },
         notFoundTemplate: "roomNotFound",
         onAfterRun: function (){
