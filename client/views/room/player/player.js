@@ -127,21 +127,23 @@ function stopPlayback(){
 }
 
 //Load 3rd party players
-Session.set("soundcloud.ready", false);
+Session.set("youtube.domready", false);
+Session.set("youtube.apiready", false);
 Session.set("youtube.ready", false);
 
-Accounts.loginServiceConfiguration
-    .find({service: "soundcloud"}).observe({
-        added: function(scData){
-            SC.initialize({
-                client_id: scData.clientId
-            });
-
-            Session.set("soundcloud.ready", true);
-        }
-    });
+Template.ytplayer.created = function(){
+    Session.set("youtube.domready", true);
+};
 
 window.onYouTubeIframeAPIReady = function(playerid){
+    Session.set("youtube.apiready", true);
+};
+
+Deps.autorun(function(){
+    if(!Session.equals("youtube.domready", true) || !Session.equals("youtube.apiready", true)){
+        return;
+    }
+
     var ytplayer = new YT.Player("yt-player", {
       width: "640",
       height: "480",
@@ -158,7 +160,8 @@ window.onYouTubeIframeAPIReady = function(playerid){
         }
       }
     });
-};
+});
+
 
 Deps.autorun(function(){
     if(Session.get("youtube.ready") && Soundcloud.ready()){
