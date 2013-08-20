@@ -32,13 +32,17 @@ Template.track.events({
 
 Template.track.rendered = function(){
     if(!this.data.playing) {
-        delete this.waveform;
+        destroySoundcloudWaveform(this);
     }
     else {
         renderSoundcloudWaveform(this);
     }
 
     animateTrack(this);
+};
+
+Template.track.destroyed = function() {
+    destroySoundcloudWaveform(this);
 };
 
 var trackHeight = 100;
@@ -87,4 +91,11 @@ function renderSoundcloudWaveform(template) {
     DNC.Player.onLoading = opts.whileloading;
 
     template.waveform = waveform;
+}
+
+function destroySoundcloudWaveform(template) {
+    if (template.waveform){
+        template.waveform.destroy();
+        delete template.waveform;
+    }
 }

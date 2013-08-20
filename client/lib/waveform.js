@@ -1,13 +1,22 @@
 (function() {
-  var Waveform,
-    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+  var Waveform;
 
   window.Waveform = Waveform = (function() {
+
+    Waveform.instances = [];
+
+    Waveform.updateInstances = function() {
+      requestAnimationFrame(Waveform.updateInstances);
+      for(var i = 0, len = Waveform.instances.length; i < len; i++) {
+        Waveform.instances[i].redraw();
+      }
+    };
+
+    Waveform.updateInstances();
 
     Waveform.name = 'Waveform';
 
     function Waveform(options) {
-      this.redraw = __bind(this.redraw, this);
       this.container = options.container;
       this.canvas = options.canvas;
       this.data = options.data || [];
@@ -31,7 +40,15 @@
       if (options.data) {
         this.update(options);
       }
+
+      this.id = Waveform.instances.length;
+      Waveform.instances.push(this);
     }
+
+    Waveform.prototype.destroy = function() {
+      Waveform.instances.splice(this.id, 1);
+      this.canvas.parentNode.removeChild(this.canvas);
+    };
 
     Waveform.prototype.setData = function(data) {
       return this.data = data;
@@ -54,7 +71,6 @@
       } else {
         this.setDataInterpolated(options.data);
       }
-      return this.redraw();
     };
 
     Waveform.prototype.redraw = function() {
@@ -153,7 +169,6 @@
       innerColorWasSet = false;
       that = this;
       return {
-        whileplaying: this.redraw,
         whileloading: function() {
           var stream;
           if (!innerColorWasSet) {
@@ -169,7 +184,6 @@
             };
             innerColorWasSet = true;
           }
-          that.redraw();
         }
       };
     };
@@ -179,9 +193,7 @@
       return $.getJSON("http://www.waveformjs.org/w?callback=?", {
         url: track.waveform_url
       }, function(data) {
-        return _this.update({
-          data: data
-        });
+        _this.update({data: data});
       });
     };
 
@@ -190,3 +202,35 @@
   })();
 
 }).call(this);
+
+// http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+// http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
+
+// requestAnimationFrame polyfill by Erik Möller. fixes from Paul Irish and Tino Zijdel
+
+// MIT license
+
+(function() {
+    var lastTime = 0;
+    var vendors = ['ms', 'moz', 'webkit', 'o'];
+    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+        window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+        window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
+                                   || window[vendors[x]+'CancelRequestAnimationFrame'];
+    }
+
+    if (!window.requestAnimationFrame)
+        window.requestAnimationFrame = function(callback, element) {
+            var currTime = new Date().getTime();
+            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+            var id = window.setTimeout(function() { callback(currTime + timeToCall); },
+              timeToCall);
+            lastTime = currTime + timeToCall;
+            return id;
+        };
+
+    if (!window.cancelAnimationFrame)
+        window.cancelAnimationFrame = function(id) {
+            clearTimeout(id);
+        };
+}());
