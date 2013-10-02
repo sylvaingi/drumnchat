@@ -13,7 +13,7 @@ Notifications.show = function(track){
 
     current.notif = window.webkitNotifications.createNotification(
         track.serviceData.artwork_url,
-        Meteor.i18n.stringFor("now-playing"),
+        i18n.stringFor("now-playing"),
         track.serviceData.title
     );
 
