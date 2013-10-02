@@ -1,13 +1,11 @@
-"use strict";
-
 Meteor.subscribe("userData");
 DNC.r_handle = Meteor.subscribe("rooms");
 
-function loginCb(){
-    Meteor.call("heartbeat");
-}
-
 DNC.login = function(service){
+    var loginCb = function (){
+        Meteor.call("heartbeat");
+    };
+
     switch(service){
         case "soundcloud":
             Meteor.loginWithSoundcloud({}, loginCb);
