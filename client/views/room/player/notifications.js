@@ -11,13 +11,10 @@ Notifications.show = function(track){
         Notifications.close();
     }
 
-    current.notif = window.webkitNotifications.createNotification(
-        track.serviceData.artwork_url,
-        i18n.stringFor("now-playing"),
-        track.serviceData.title
-    );
-
-    current.notif.show();
+    current.notif = new window.Notification( i18n.stringFor("now-playing"), {
+        icon: track.serviceData.artwork_url,
+        body: track.serviceData.title
+    });
 
     current.to = setTimeout(function(){
         Notifications.close();
@@ -37,19 +34,13 @@ Notifications.close = function(){
     }
 };
 
-if(window.webkitNotifications){
-    var permission = window.webkitNotifications.checkPermission();
-
-    if (permission === 0){
-        enabled = true;
-    }
-    else if (permission === 1){
-        $(document).one("click", function(){
-            window.webkitNotifications.requestPermission(function(){
+if(window.Notification){
+    $(document).one("click", function(){
+        window.Notification.requestPermission(function(permission){
+            if (permission === "granted")
                 enabled = true;
-            });
         });
-    }
+    });
 }
 
 Deps.autorun(function(){
