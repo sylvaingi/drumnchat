@@ -79,7 +79,7 @@ Tracks.enqueue = function(trackUrl, userId, roomId){
     var track = Tracks.findOne({roomId: roomId, type:serviceType, "serviceData.id":serviceData.id});
     if(track){
         console.log("Track '"+serviceData.title+"' is already enqueued, voting instead");
-        Tracks.addVote(track._id);
+        Tracks.addVote(track._id, userId);
         return;
     }
 
