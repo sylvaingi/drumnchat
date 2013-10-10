@@ -36,30 +36,29 @@ var Player = {
 function playTrack(track){
     stopPlayback();
 
+    console.log("Playing track", track.serviceData.title, track);
+
     Meteor.call("onAirOffset", Session.get("roomId"), function(error,result){
         console.log("Playing track offset is "+ result + "ms");
         track._offset = result;
 
-        startPlayback(track);
+        Player.track = track;
+        Session.set("player.track", track);
+
+        if(track.type === "sc"){
+            loadSoundcloudTrack(track);
+        }
+        else if(track.type === "yt"){
+            loadYoutubeTrack(track);
+        }
     });
-
-    console.log("Playing track", track.serviceData.title, track);
-    if(track.type === "sc"){
-        loadSoundcloudTrack(track);
-    }
-    else if(track.type === "yt"){
-        loadYoutubeTrack(track);
-    }
-
-    Player.track = track;
-    Session.set("player.track", track);
 }
 
 function loadSoundcloudTrack(track){
     var opts = {
-        autoLoad: true,
+        autoPlay: true,
+        position: track._offset,
         whileloading: function(){
-            deferPlayAtRequiredOffset.call(this, track);
             Player.onLoading && Player.onLoading.call(this, track);
         },
         whileplaying:function(){
@@ -72,39 +71,19 @@ function loadSoundcloudTrack(track){
             stream.mute();
         }
 
-        track._loadstart = Date.now();
         Player.stream = stream;
     });
 }
 
-function deferPlayAtRequiredOffset(track){
-    if(!track._playing && track._offset!== null){
-        var latencyComp = Date.now() - track._loadstart;
-        if(this.duration > track._offset + latencyComp){
-            console.log("Playing track caught up at " + (track._offset + latencyComp) + "ms (comp "+latencyComp+"ms)");
-
-            track._playing = true;
-
-            this.setPosition(track._offset + latencyComp);
-            this.play();
-        }
-    }
-}
-
 function loadYoutubeTrack(track){
     Player.ytplayer.cueVideoById(track.serviceData.id, 0, "large");
+    Player.ytplayer.seekTo(track._offset / 1000);
     setYoutubeMute();
+    Player.ytplayer.playVideo();    
 }
 
 function setYoutubeMute(){
     Player.ytplayer[!Player.muted? "unMute": "mute"]();
-}
-
-function startPlayback(track){
-    if(track.type === "yt"){
-        Player.ytplayer.seekTo(track._offset / 1000);
-        Player.ytplayer.playVideo();
-    }
 }
 
 function stopPlayback(){
